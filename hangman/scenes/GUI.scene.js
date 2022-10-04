@@ -68,7 +68,7 @@ export default class GUI extends Phaser.Scene{
     
     display_ehp(){
 		UI.ehp = this.add.text(
-			WIDTH-50,30,"ENEMY HP:0",{font:"2.5rem superstarregular"}
+			WIDTH-30,30,"",{font:"2.5rem superstarregular"}
 		)
 		.setOrigin(1,0)
 		this.update_ehp() 
@@ -86,7 +86,7 @@ export default class GUI extends Phaser.Scene{
     
     update_ehp(){
     	const {ehp} = UI
-    	ehp.setText(`ENEMY HP:${GAME.enemy.hp}`)  
+    	ehp.setText(`HP:${GAME.enemy.hp}`)  
     }
     
     
@@ -154,6 +154,8 @@ export default class GUI extends Phaser.Scene{
 		const enemy = this.add.image(WIDTH/2,200,'char')
 		.setOrigin(0.5)
 
+		const ehp_bar = this.add.image(WIDTH/2,100,'ehp','F.png')
+		.setScale(6)
 		this.tweens.add(
 			{
 				targets:enemy,

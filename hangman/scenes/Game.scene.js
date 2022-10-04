@@ -43,6 +43,12 @@ export default class Game extends Phaser.Scene{
 		this.load.setPath('../../global_assets/img/ui')
 		this.load.image("btn0_lowres","btn0_lowres.png")
 		this.load.image("btn1_lowres","btn1_lowres.png")
+
+		this.load.setPath('../../global_assets/img/ui/ehp')
+		this.load.atlas('ehp','spritesheet.png','spritesheet.json')
+		this.load.setPath('../../global_assets/img/ui/playerhp')
+		this.load.image('ehp',)
+
 	}
 	
 	create(){
