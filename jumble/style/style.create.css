@@ -1,0 +1,111 @@
+
+@font-face {
+    font-family: 'superstarregular';
+    src: url('/global_style/superstar_memesbruh03-webfont.woff2') format('woff2'),
+    url('../global_style/superstar_memesbruh03-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    
+}
+    
+*{
+    font-family:'superstarregular';
+}
+
+     
+    body{   
+        
+        background-color: #222640;
+        color: #222640;
+    }
+    
+    form{ 
+        
+        width: 920px;
+        height: auto;
+        margin:2rem auto;
+        padding:6rem;
+        background:#93BFA6;   
+        box-shadow: 15px 15px  #1E1126;
+        border-radius:10px;
+    }
+
+
+
+    h3 {
+        
+        text-align:center;
+        margin:2rem 0;
+        font-size: 2rem;
+        text-shadow: 2px 2px  #F2DB94;
+        color: #1E1126;
+    }
+    
+    
+    /*tool tip tips()*/              
+    .tooltip{
+        
+        font-size: 1rem;
+        color: #3C6973;
+    }
+                
+    label{
+        /*font-weight:bold*/
+        font-size: 1.3rem;
+        
+    }
+                
+    input {
+        margin:0 auto 1.2rem;
+    }
+    
+    input[type=radio]{
+        margin: 1rem 2rem 1rem 0;
+    }
+    
+    
+    #btns{
+        text-align:center;
+        
+    }
+    
+                
+    #btns input{
+        width: 8rem;
+        margin-top: .6rem;
+        margin: .5rem;
+        box-shadow: 5px 5px  #3C6973;
+        padding:.3rem;
+        border-radius:10px;
+        border:2px solid#222640;
+        background-color: #F29472;
+        color:#1E1126;
+    }
+
+    #btns input:hover{
+        box-shadow: 5px 0px  #3C6973;
+        transform: translate(5px,5px);
+        box-shadow: none;
+        background-color: #D9667B;
+        color: #F2DB94;
+    }
+    
+    
+    input[type=text]{
+        padding: .5rem;
+        font-size: .5rem 1rem;
+        background-color: #F2DB94;
+        border: none;
+        border-bottom:4px solid #3C6973;
+        width: 100%;
+        border-radius:7px;
+    }
+
+    input[type=text]:focus{
+        outline: none;
+        border: 1px solid  rgb(83, 109, 94);
+        background-color: #F2B077;
+        
+
+    }
+   

@@ -1,0 +1,69 @@
+
+
+@font-face {
+    font-family: 'superstarregular';
+    src: url('/global_style/superstar_memesbruh03-webfont.woff2') format('woff2'),
+    url('../global_style/superstar_memesbruh03-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    
+}
+    
+*{
+    font-family:'superstarregular';
+}
+
+body{   
+        
+	 background: #222640;
+	text-align: center;
+}
+
+section{
+
+	background:  #d9667b;
+	padding: 1rem;
+	width: 80%;
+	max-width: 920px;
+	margin: 3rem auto;
+	box-shadow: 15px 15px #1E1126;	
+	border-radius:10px;
+}
+
+h1
+{
+	color: #f2dd94;
+	text-shadow: 5px 5px #A63272;
+	font-size:10vw;
+}
+
+
+button{
+	
+    width: 30vw;
+    margin-top: .4rem;
+    margin: .5rem;
+    box-shadow: 5px 5px #A63272;
+    padding:.3rem;
+    border-radius:10px;
+    border:2px solid#222640;        
+	background-color: #F29472;
+    color:#1E1126;
+    font-size: 3vw;
+}
+
+button img{
+	width: 100%;
+}
+
+#preview{
+	width: 40%;
+}
+
+button:hover{
+       
+        transform: translate(5px,5px);
+        box-shadow: none;
+        background-color: #A63272;
+		color: #F2DB94;
+}

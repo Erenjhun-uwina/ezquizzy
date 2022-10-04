@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>Home-EzQuizzy</title> 
+	<!-- redirect to hangman temporarily -->
+	<link rel="stylesheet" href="global_style/style.global.css"  >
+	<link rel="stylesheet" href="./style.create.css">
+	<link rel="stylesheet" href="./style.css"  >
+	<script type="module" src="./js/index.js" defer></script>
+	
+</head>
+
+<body>
+	
+	<div id="main_container">
+		
+		<!-- hidden tabs  -->
+
+		<div id="profile_con">
+			<p id="p_name">name</p>
+			<p id="p_new_acc">+new account</p>
+			<p id="p_logout">logout</p>
+		</div>
+
+		<div id="gametype_select">
+			<section >
+				<button class="game_select" data-type="hangman">
+						<img src="./hangman/assets/hangman.png">
+						<span>hangman</span>
+				</button>
+
+				<button class="game_select" data-type="jumble">
+						<img src="./hangman/assets/hangman.png">
+						<span>jumble</span>
+				</button>
+			</section>
+		</div>
+		<!--  -->
+		
+		<h1>ezquizzy <img id="profile_img" src='./hangman/assets/hangman.png'></h1>
+		
+
+		<div id="top_con">
+				<input type="text" class="mode_select_txt txt" placeholder="enter code:hm-42069">
+				<button class="mode_select_btn play" > PLAY </button>
+				<button class="mode_select_btn create" > CREATE </button>
+		</div>
+		
+		
+		
+		<div class="game_suggestions_container" >
+			<button class="game_suggestion"  data-code="hm0001" data-id="GfQ1j1CeusFbOiCAFp5E"><img src="hangman/assets/hangman.png" ><br>hangman</button>
+			<button class="game_suggestion" ><img src="hangman/assets/hangman.png" ><br>in progress...</button>
+			<button class="game_suggestion" ><img src="hangman/assets/hangman.png" ><br>in progress...</button>
+		</div>
+		<div class="game_suggestions_container" >
+			<button class="game_suggestion" ><img src="hangman/assets/hangman.png" ><br>in progress...</button>
+			<button class="game_suggestion" ><img src="hangman/assets/hangman.png" ><br>in progress...</button>
+			<button class="game_suggestion" ><img src="hangman/assets/hangman.png" ><br>in progress...</button>
+		</div>
+	</div>
+
+	
+    
+  
+</body>
+
+</html>

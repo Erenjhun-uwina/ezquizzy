@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>create success</title>
+	<link rel="stylesheet" href="global_style/style.global.css">
+	<link rel="stylesheet" href="style.create.css">
+	
+</head>
+<body>	
+	
+	<section>
+		<h1>Success!</h1>
+		
+			<button id="preview">
+					<img src="hangman/assets/hangman.png">
+					<span id="title">sample title</span>
+			</button> 
+
+			<br>
+	
+			<p  id="code">code:</p>
+
+			<button id="exit">exit</button>
+	
+		
+	</section>
+	
+	<script>
+
+		const code_p = document.querySelector('#code')
+		const preview = document.querySelector('#preview')
+		const title_s = document.querySelector('#title')
+		const exit_btn = document.querySelector('#exit')
+
+		
+		const url = new URLSearchParams(window.location.search);
+		const code = url.get('code').toUpperCase();
+		const title = url.get('title')
+
+		code_p.textContent += code
+		title_s.textContent = '"'+title+'"'
+
+		exit_btn.onclick = () => window.location = './index.html'
+		code_p.onclick = () => Clipboard.write
+		preview.onclick = () => window.location = "hangman/index.hangman.html?code="+code
+	</script>
+
+</body>
+</html>
