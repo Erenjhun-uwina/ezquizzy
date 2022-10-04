@@ -29,9 +29,11 @@ export default class Game extends Phaser.Scene{
 		}).
 		setOrigin(0.5)
 
-		this.load.setPath("./assets/hpbar")
-		this.load.atlas("hpbar","sp.png","sp.json")
-		
+		//load music path
+		this.load.setPath('../../global_assets/music')
+		this.load.audio('fight','fight.wav')
+
+		//load img path
 		this.load.setPath("./assets/UI")
 
 		this.load.image("btn0_lowres","btn0_lowres.png")
@@ -67,6 +69,7 @@ export default class Game extends Phaser.Scene{
 		
 		this.enemy = enemy
 		this.fight()
+		this.sound.play('fight')
 	}
 	
 	fight(){

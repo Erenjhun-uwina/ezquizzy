@@ -1,5 +1,5 @@
 
-import * as Uis from '../js/Ui.js'
+import * as Uis from '../../global_js/Ui.js'
 
 let WIDTH,HEIGHT,GAME,
 UI 
@@ -139,6 +139,9 @@ export default class GUI extends Phaser.Scene{
 	display_visual_panel(){
 		UI.panel = new Uis.Panel(this,20,20,WIDTH-40,600,0x355D68)
 		UI.panel.bg.setStrokeStyle(10,0x94C5AC)
+		
+		const screen = this.add.renderTexture(20,20,WIDTH-40,600,)
+		screen.fill(0xffffff,1)
 	}
 	
 	display_blank_panel(in_w){
