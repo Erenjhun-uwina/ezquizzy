@@ -29,19 +29,25 @@ export default class Game extends Phaser.Scene{
 		}).
 		setOrigin(0.5)
 
+		
+
 		//load music path
 		this.load.setPath('../../global_assets/music')
 		this.load.audio('fight','fight.wav')
 
 		//load img path
-		this.load.setPath("./assets/UI")
-
+		this.load.setPath('../../global_assets/img')
+		this.load.image('char','cyclone.png')
+		
+		//load ui path
+		this.load.setPath('../../global_assets/img/ui')
 		this.load.image("btn0_lowres","btn0_lowres.png")
 		this.load.image("btn1_lowres","btn1_lowres.png")
 	}
 	
 	create(){
 		GUI = this.scene.get("GUI")
+		
 		if(GUI)return this.init()
 	} 
 	
@@ -66,8 +72,10 @@ export default class Game extends Phaser.Scene{
 		player.maxhp = game.hp
 		player.score = 0
 		player.regen = game.regen
-		
+		//enemy vars
 		this.enemy = enemy
+		//game
+		this.lv = 0
 		this.fight()
 		this.sound.play('fight')
 	}
@@ -75,6 +83,7 @@ export default class Game extends Phaser.Scene{
 	fight(){
 
 		if(words.length<1)return
+		this.lv++
 		const word = [...this.getWord(words)]
 		this.word = word
 		
@@ -91,6 +100,7 @@ export default class Game extends Phaser.Scene{
 		//generate random letters besides the word's letters
 		const excess = this.shuffle_slice(word_keys,num_of_random_keys)
 		this.excess_keys = excess
+		
 		
 		GUI.scene.restart()
 	}

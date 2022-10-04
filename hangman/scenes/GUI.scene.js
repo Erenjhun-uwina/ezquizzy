@@ -1,8 +1,10 @@
 
 import * as Uis from '../../global_js/Ui.js'
+import Screen from './Screen.scene.js'
 
 let WIDTH,HEIGHT,GAME,
-UI 
+UI,
+screen
 
 let ft
 
@@ -19,7 +21,7 @@ export default class GUI extends Phaser.Scene{
 		WIDTH = this.game.canvas.width
 		HEIGHT = this.game.canvas.height
 		GAME = this.scene.get("Game")
-
+		screen = this.scene.get('Screen')
 		this.display_UIs()
 	}
 	
@@ -32,7 +34,7 @@ export default class GUI extends Phaser.Scene{
 		this.display_blank_panel(word)
 		this.display_keyboard()
 		this.init_events()
-		this.display_score()
+		this.display_lv()
 		this.display_hp()
 		this.display_ehp()
 		
@@ -47,14 +49,17 @@ export default class GUI extends Phaser.Scene{
 	
 	
 	/////
-	display_score(){
-		UI.score = this.add.text(
-			35,30,"score:0",{font:"2.5rem superstarregular"}
+	display_lv(){
+		UI.lv = this.add.text(
+			35,30,"lv:0",{font:"2.5rem superstarregular",color :'black'}
 		);
-		this.update_score() 
+		
+		this.update_lv() 
 	}
 	
     display_hp(){
+		
+
     	UI.hp = this.add.text(
 	    	35,550,"HP:0",{font:"2.5rem superstarregular"}
     	)
@@ -63,9 +68,9 @@ export default class GUI extends Phaser.Scene{
     
     display_ehp(){
 		UI.ehp = this.add.text(
-			WIDTH/2,30,"ENEMY HP:0",{font:"2.5rem superstarregular"}
+			WIDTH-50,30,"ENEMY HP:0",{font:"2.5rem superstarregular"}
 		)
-		.setOrigin(0.5,0)
+		.setOrigin(1,0)
 		this.update_ehp() 
     }
     
@@ -74,14 +79,14 @@ export default class GUI extends Phaser.Scene{
     	hp.setText(`HP:${GAME.player.hp}`)
     }
     
-    update_score(){
-        const {score} = UI
-    	score.setText(`score:${GAME.player.score}`)
+    update_lv(){
+        const {lv} = UI
+    	lv.setText(`lv:${GAME.lv}`)
     }
     
     update_ehp(){
     	const {ehp} = UI
-    	ehp.setText(`ehp:${GAME.enemy.hp}`)  
+    	ehp.setText(`ENEMY HP:${GAME.enemy.hp}`)  
     }
     
     
@@ -136,12 +141,36 @@ export default class GUI extends Phaser.Scene{
 		this.fade()
 	}
 	
+	update_visual_panel()
+	{
+	
+	}
+
 	display_visual_panel(){
+
 		UI.panel = new Uis.Panel(this,20,20,WIDTH-40,600,0x355D68)
 		UI.panel.bg.setStrokeStyle(10,0x94C5AC)
+
+		const enemy = this.add.image(WIDTH/2,200,'char')
+		.setOrigin(0.5)
+
+		this.tweens.add(
+			{
+				targets:enemy,
+				rotation:enemy.rotation+1000,
+				duration:500000,
+				loop:true
+			}
+		)
+
 		
-		const screen = this.add.renderTexture(20,20,WIDTH-40,600,)
-		screen.fill(0xffffff,1)
+		const ehp =  this.add.image(WIDTH/2,10,'')
+		const hp =  this.add.image(WIDTH/2,10,'')
+
+
+		UI.panel.enemy = enemy
+		UI.panel.add(enemy)
+
 	}
 	
 	display_blank_panel(in_w){
@@ -230,7 +259,7 @@ export default class GUI extends Phaser.Scene{
 		events.on("guessed",(data)=>{
 			this.update_blanks(data.guess)
 			this.update_ehp()
-			this.update_score()
+			this.update_lv()
 		});
 		
 		events.on("failed_guess",()=>{
