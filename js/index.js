@@ -37,12 +37,46 @@ import 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js'
     	
     	
     	const suggestion_btns = document.querySelectorAll(".game_suggestion")
-    	
+    	const game_details = $('#game_details ')[0]
+		const play_button = $('#play_button')[0]
+
+		const game_details_close = $('#game_details_close ')[0]
+
+		game_details_close.onclick = ()=>{
+			game_details.style.translate = '0 -110% '
+		}
+
+		play_button.onclick = ()=>{
+			
+			const code = play_button.dataset.code
+			window.location = "../hangman/index.hangman.html?code="+code
+		}
+
+		const game_details_code = document.querySelector('#game_details_code')
+		const game_details_type = document.querySelector('#game_details_type')
+		const game_details_title = document.querySelector('#game_details_title')
+
+		
+		console.log(game_details_code)
+
     	suggestion_btns.forEach(
-    		(e)=> {
+    		e=> {
     			e.onclick = ()=>{
-	    			const code = e.dataset.code	    			
-	    			window.location = "../hangman/index.hangman.html?code="+code
+
+					
+	    			const code = e.dataset.code
+					const title = e.dataset.title
+					const type = e.dataset.type
+
+					game_details.style.translate = '0 0 '
+					window.scrollTo(0, 0);
+					
+					game_details_code.innerText = `code ${code}`
+					game_details_type.innerText = type
+					game_details_title.innerText = title
+					play_button.dataset.code = code
+
+	    			
     			}
     		}
     	)

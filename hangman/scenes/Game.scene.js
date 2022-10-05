@@ -5,20 +5,18 @@ const alphabet = alpha.map((x) => String.fromCharCode(x));
 let WIDTH,
 HEIGHT,
 GUI,
-db,
 words,
 player={},
 enemy={},
 initialized
 
 import DB from	"../../global_js/database.js"
-
+const db = new DB
 
 export default class Game extends Phaser.Scene{
 
 	constructor(){
 		super("Game")
-		console.log("hangman game start!!")
 	}
 	
 	preload(){
@@ -41,28 +39,28 @@ export default class Game extends Phaser.Scene{
 		
 		//load ui path
 		this.load.setPath('../../global_assets/img/ui')
+		this.load.atlas('hpbar','spritesheet.png','spritesheet.json')
 		this.load.image("btn0_lowres","btn0_lowres.png")
 		this.load.image("btn1_lowres","btn1_lowres.png")
 
 		this.load.setPath('../../global_assets/img/ui/ehp')
 		this.load.atlas('ehp','spritesheet.png','spritesheet.json')
-		this.load.setPath('../../global_assets/img/ui/playerhp')
-		this.load.image('ehp',)
+		
 
 	}
 	
 	create(){
+		console.log("hangman game start!!")
+		console.clear()
 		GUI = this.scene.get("GUI")
-		
 		if(GUI)return this.init()
 	} 
 	
 	async init(){
-	
 		if(initialized)return
 		initialized = true
 		
-		db = new DB
+		
 		const url = new URLSearchParams(window.location.search);
 		const code = url.get("code").split('-').join('').toLowerCase()
 		
@@ -75,7 +73,7 @@ export default class Game extends Phaser.Scene{
 		//player vars
 		this.player = player
 		player.hp = game.hp
-		player.maxhp = game.hp
+		player.mhp = game.hp
 		player.score = 0
 		player.regen = game.regen
 		//enemy vars
@@ -93,6 +91,7 @@ export default class Game extends Phaser.Scene{
 		const word = [...this.getWord(words)]
 		this.word = word
 		
+		enemy.mhp = word.length
 		enemy.hp = word.length
 		
 		let guessed = word.map(()=>"-")
@@ -128,7 +127,7 @@ export default class Game extends Phaser.Scene{
 		this.events.emit("guessed",{guess:guessed})
 		if(enemy.hp>0)return
 
-		player.hp = Math.min(player.hp += player.regen,player.maxhp)
+		player.hp = Math.min(player.hp += player.regen,player.mhp)
 		this.events.emit("VICTORY")
 	}
 	

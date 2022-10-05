@@ -24,7 +24,8 @@ body{
 	overflow-x: hidden;
 	text-align: center;
 	margin: auto;
-		color: #222640;
+	color: #222640;
+	
 }
 
 
@@ -119,7 +120,6 @@ h1{
 	text-align: left;
 	font-size: 5vw;
 	padding-left: 1rem;
-	box-shadow:0 1.3vw #A63272 ;
 	user-select: none;
 }
 
@@ -179,8 +179,54 @@ h1{
 	font-size:2vw;
 	width:10%;
 	border-radius:5px;
+    box-shadow:.2vw .2vw#222640;
 }
-
+.play:hover, .create:hover{
+    box-shadow: none;
+	background-color: #D9667B;
+	color: #F2DB94;
+	transform: translate(.2vw .2vw);
+}
 .txt{
 	width: 40%;
+}
+
+#game_details{
+	margin: auto;
+	justify-content: center;
+	user-select: none;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	translate: 0 -110%;
+	transition: 1s;
+}
+
+#game_details_img{
+
+   border: .5vw solid #222640;
+   border-radius: 10px;
+   width: 20vw;
+   margin: 2vw;
+}
+
+#game_details h5{
+
+	font-size: 3vw;
+}
+#game_details h3{
+
+	font-size: 2vw;
+}
+#game_details h6{
+
+	font-size: 1.5vw;
+}
+#game_details_close{
+
+	font-size: 2.5vw;
+	margin: 0;
+	text-align: left;
 }

@@ -75,8 +75,13 @@ export default class GUI extends Phaser.Scene{
     }
     
     update_hp(){
-    	const {hp} = UI
-    	hp.setText(`HP:${GAME.player.hp}`)
+    	const php = UI.hp
+    	php.setText(`HP:${GAME.player.hp}`)
+		
+		const {mhp,hp} = GAME.player
+    	
+		php.setText(`HP:${hp}`)  
+		UI.panel.hp.setScale(2*hp/mhp,2)
     }
     
     update_lv(){
@@ -86,7 +91,10 @@ export default class GUI extends Phaser.Scene{
     
     update_ehp(){
     	const {ehp} = UI
-    	ehp.setText(`HP:${GAME.enemy.hp}`)  
+		const {mhp,hp} = GAME.enemy
+    	
+		ehp.setText(`HP:${hp}`)  
+		UI.panel.ehp.setScale(2*hp/mhp,2)
     }
     
     
@@ -105,7 +113,22 @@ export default class GUI extends Phaser.Scene{
 		
 		
 		const {defeat} = UI
+
+		//try again
+		defeat.add(this.add.rectangle(-WIDTH/3+100,300,400,150,0x222640).setInteractive()
+		.on('pointerup',()=>{
+				window.location.reload()
+			}
+		));
 		
+		//home
+		defeat.add(this.add.rectangle(WIDTH/3-10,300,200,150,0x222640).setInteractive()
+		.on('pointerup',()=>{
+				window.location = '../index.html'
+			}
+		));
+
+
 		defeat.add(dropshadow)
 		defeat.moveTo(dropshadow,0)
 		defeat.bg.setStrokeStyle(10,0xC24B6E)
@@ -116,7 +139,8 @@ export default class GUI extends Phaser.Scene{
 		.setDepth(105)
 		
 		const txt = this.add.text(0,0,"DEFEAT",
-		{font:` 10rem superstarregular`})
+		{font:` 10rem superstarregular`,
+		color:'#F2DB94'})
 		.setOrigin(0.5)
 		.setShadow(10,10,"#355D68")
 		
@@ -124,12 +148,34 @@ export default class GUI extends Phaser.Scene{
 		defeat.add(txt)
 		
 		const score_txt = this.add.text(0,100,`score:${GAME.player.score}`,
-		{font:` 5rem superstarregular`})
+		{font:` 5rem superstarregular`,
+		color:'#F2DB94'
+		})
 		.setOrigin(0.5)
 		
 		defeat.score_txt = score_txt
 		defeat.add(score_txt)
 		
+		const try_again =  this.add.text(-WIDTH/3+100,300,'try again',
+		{font:` 5rem superstarregular`,
+		color:'#F2DB94'})
+		.setOrigin(0.5)
+
+		defeat.add(try_again)
+		
+
+		const exit =  this.add.text(WIDTH/3-10,300,`exit`,
+		{font:` 5rem superstarregular`,
+		color:'#F2DB94'
+		})
+		.setOrigin(0.5)
+
+		
+		defeat.add(exit)
+		
+		
+
+
 		this.tweens.add({
 			targets:defeat,
 			duration:900,
@@ -137,13 +183,13 @@ export default class GUI extends Phaser.Scene{
 			y:WIDTH/2,
 			scaleX:1
 		});
-		
+
 		this.fade()
 	}
 	
 	update_visual_panel()
-	{
-	
+	{	
+		
 	}
 
 	display_visual_panel(){
@@ -151,11 +197,18 @@ export default class GUI extends Phaser.Scene{
 		UI.panel = new Uis.Panel(this,20,20,WIDTH-40,600,0x355D68)
 		UI.panel.bg.setStrokeStyle(10,0x94C5AC)
 
-		const enemy = this.add.image(WIDTH/2,200,'char')
+		const enemy = this.add.image(WIDTH/2,300,'char')
 		.setOrigin(0.5)
 
-		const ehp_bar = this.add.image(WIDTH/2,100,'ehp','F.png')
-		.setScale(6)
+		
+		this.add.image(WIDTH/2,50,'hpbar','B.png').setScale(2)
+		UI.panel.ehp = this.add.image(WIDTH/2,50,'hpbar','F.png').setScale(2)
+		this.add.image(WIDTH/2,50,'hpbar','M.png').setScale(2)
+		
+		this.add.image(WIDTH/2,590,'hpbar','B.png').setScale(2)
+		UI.panel.hp = this.add.image(WIDTH/2,590,'hpbar','F.png').setScale(2)
+		this.add.image(WIDTH/2,590,'hpbar','M.png').setScale(2)
+
 		this.tweens.add(
 			{
 				targets:enemy,
@@ -164,11 +217,6 @@ export default class GUI extends Phaser.Scene{
 				loop:true
 			}
 		)
-
-		
-		const ehp =  this.add.image(WIDTH/2,10,'')
-		const hp =  this.add.image(WIDTH/2,10,'')
-
 
 		UI.panel.enemy = enemy
 		UI.panel.add(enemy)
