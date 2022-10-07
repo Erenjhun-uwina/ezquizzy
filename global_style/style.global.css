@@ -8,5 +8,10 @@
 
 button{
 	user-select: none;
+	cursor: pointer;
 }
 
+input[type=text]{
+	outline: none;
+	border: none;
+}

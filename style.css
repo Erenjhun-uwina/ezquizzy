@@ -14,7 +14,7 @@
 body{
 	background-color: #222640;
 	color: #222640;
-
+	padding:0;
 }
 
 #main_container{
@@ -23,9 +23,10 @@ body{
 	max-height: 50000vh;
 	overflow-x: hidden;
 	text-align: center;
-	margin: auto;
+	margin: 0 auto;
 	color: #222640;
-	
+	position: relative;
+	top: 0;
 }
 
 
@@ -113,6 +114,25 @@ body{
 	height: 200vw;
 }
 
+#gametype_select_close{
+	font-size: 2.5vw;
+	margin: 0;
+	text-align: left;
+	cursor: pointer;
+}
+
+.game_select{
+	width:25vw ;
+	padding:1vw;
+	margin: 2vw;
+}
+
+.game_select  img{
+	width: 90%;
+	padding:.5vw;
+}
+
+
 h1{
 	background: #D9667B;
 	width: 100vw;
@@ -141,10 +161,11 @@ h1{
 	box-shadow:.6vw .6vw #A63272;
 	font-size: 2vw;
 	position: absolute;
-	right: 1vw;
+	right: 1rem;
 	top: 7vw;
 	transform:scaleY(0) translateY(-200%);
 	transition:.2s;
+	z-index: 20;
 }
 
 #profile_con p{

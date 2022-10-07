@@ -6,10 +6,14 @@ import 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js'
     	
 		const db = new DB
 		
+
 		play_btn.onclick = ()=>start();
+		code_input.addEventListener("input",()=> code_input.placeholder = "code:hm-42069",{once:true})
+    
+
 		code_input.addEventListener('keypress',function(e){
 			
-			if(! (e.key === 'Enter'))return
+			if(!(e.key === 'Enter'))return
 			console.log('enter active');
 			e.preventDefault()
 			start()
@@ -17,6 +21,7 @@ import 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js'
     	
     	async function start(){
 
+			code_input.placeholder = "blank code????bruh"
 			if(code_input.value == '')return
     		
     		const code = code_input.value.split('-').join('').toLowerCase()
@@ -32,7 +37,6 @@ import 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js'
     	
     	function game_not_exists(){
     		code_input.placeholder = "INVALID CODE"
-    		code_input.addEventListener("input",()=> code_input.placeholder = "code:hm-42069",{once:true})
     	}
     	
     	
@@ -70,7 +74,6 @@ import 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js'
 
 					game_details.style.transform = 'scaleX(1)'
 					
-					
 					game_details_code.innerText = `code ${code}`
 					game_details_type.innerText = type
 					game_details_title.innerText = title
@@ -105,7 +108,7 @@ import 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js'
 		
 
 		create_bnt.onclick = (ev) => {
-			 game_details.style.transform = 'scaleX(1)'
+			game_select.style.transform = 'translateY(0)'
 			 game_select.state = 'active'
 			 ev.stopPropagation()
 		}

@@ -13,9 +13,7 @@ top: 50%;<!DOCTYPE html>
 
 <body>
 	
-	<div id="main_container">
-		
-		<!-- hidden tabs  -->
+	<!-- hidden tabs  -->
 		<!-- 	
 				type of game
 					image
@@ -23,7 +21,7 @@ top: 50%;<!DOCTYPE html>
 				
 				play copy code
 		 -->
-		<section id="game_details">
+		 <section id="game_details">
 			<div id="game_details_close">x</div>
 			<h5 id='game_details_title'>sample title</h5>
 			
@@ -44,6 +42,7 @@ top: 50%;<!DOCTYPE html>
 
 		<div id="gametype_select">
 			<section >
+				<div id="gametype_select_close">x</div>
 				<button class="game_select" data-type="hangman">
 						<img src="./hangman/assets/hangman.png">
 						<span>hangman</span>
@@ -56,12 +55,13 @@ top: 50%;<!DOCTYPE html>
 			</section>
 		</div>
 		<!--  -->
+
+	<div id="main_container">
 		
 		<h1>ezquizzy <img id="profile_img" src='./hangman/assets/hangman.png'></h1>
 		
-
 		<div id="top_con">
-				<input type="text" class="mode_select_txt txt" placeholder="enter code:hm-42069">
+				<input type="text" class="mode_select_txt txt" placeholder="enter code:hm-42069" maxlength="10">
 				<button class="mode_select_btn play" > PLAY </button>
 				<button class="mode_seect_btn create" > CREATE </button>
 				

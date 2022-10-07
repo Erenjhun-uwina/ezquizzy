@@ -6,7 +6,7 @@ let WIDTH,HEIGHT,GAME,
 UI,
 screen
 
-let ft
+
 
 export default class GUI extends Phaser.Scene{
 
@@ -104,15 +104,14 @@ export default class GUI extends Phaser.Scene{
 		const {txt} = UI.blanks
 		txt.setText(guess.join(""))
 	}
+
+	//####################################################################
 	
 	display_defeat_panel(){
-		UI.defeat =  new Uis.Panel(this,WIDTH/2,HEIGHT/2,WIDTH-40,500,0xB0294D)
+		const defeat =  new Uis.Panel(this,WIDTH/2,HEIGHT/2,WIDTH-40,500,0xB0294D)
 		const dropshadow = this.add.rectangle(20,25,WIDTH-40,500,0x000)
 		.setOrigin(0.5,0)
 		.setDepth(103)
-		
-		
-		const {defeat} = UI
 
 		//try again
 		defeat.add(this.add.rectangle(-WIDTH/3+100,300,400,150,0x222640).setInteractive()
@@ -173,9 +172,6 @@ export default class GUI extends Phaser.Scene{
 		
 		defeat.add(exit)
 		
-		
-
-
 		this.tweens.add({
 			targets:defeat,
 			duration:900,
@@ -186,7 +182,89 @@ export default class GUI extends Phaser.Scene{
 
 		this.fade()
 	}
+
+	//#################        end defeat display            #################
 	
+
+	display_victory_panel(){
+		const victory =  new Uis.Panel(this,WIDTH/2,HEIGHT/2,WIDTH-40,500,0xB0294D)
+		const dropshadow = this.add.rectangle(20,25,WIDTH-40,500,0x000)
+		.setOrigin(0.5,0)
+		.setDepth(103)
+		
+
+		//try again
+		victory.add(this.add.rectangle(-WIDTH/3+100,300,400,150,0x222640).setInteractive()
+		.on('pointerup',()=>{
+				window.location.reload()
+			}
+		));
+		
+		//home
+		victory.add(this.add.rectangle(WIDTH/3-10,300,200,150,0x222640).setInteractive()
+		.on('pointerup',()=>{
+				window.location = '../index.html'
+			}
+		));
+
+
+		victory.add(dropshadow)
+		victory.moveTo(dropshadow,0)
+		victory.bg.setStrokeStyle(10,0xC24B6E)
+		.setOrigin(0.5,0)
+				
+		victory
+		.setScale(0,1)
+		.setDepth(105)
+		
+		const txt = this.add.text(0,0,"victory",
+		{font:` 10rem superstarregular`,
+		color:'#F2DB94'})
+		.setOrigin(0.5)
+		.setShadow(10,10,"#355D68")
+		
+		victory.txt = txt
+		victory.add(txt)
+		
+		const score_txt = this.add.text(0,100,`score:${GAME.player.score}`,
+		{font:` 5rem superstarregular`,
+		color:'#F2DB94'
+		})
+		.setOrigin(0.5)
+		
+		victory.score_txt = score_txt
+		victory.add(score_txt)
+		
+		const try_again =  this.add.text(-WIDTH/3+100,300,'play again',
+		{font:` 5rem superstarregular`,
+		color:'#F2DB94'})
+		.setOrigin(0.5)
+
+		victory.add(try_again)
+		
+
+		const exit =  this.add.text(WIDTH/3-10,300,`exit`,
+		{font:` 5rem superstarregular`,
+		color:'#F2DB94'
+		})
+		.setOrigin(0.5)
+
+		
+		victory.add(exit)
+		
+		this.tweens.add({
+			targets:victory,
+			duration:900,
+			ease:"Power2",
+			y:WIDTH/2,
+			scaleX:1
+		});
+
+		this.fade()
+	}
+
+	//#####################################################
+
 	update_visual_panel()
 	{	
 		
@@ -197,9 +275,11 @@ export default class GUI extends Phaser.Scene{
 		UI.panel = new Uis.Panel(this,20,20,WIDTH-40,600,0x355D68)
 		UI.panel.bg.setStrokeStyle(10,0x94C5AC)
 
-		const enemy = this.add.image(WIDTH/2,300,'char')
+
+		const enemy = this.add.image(WIDTH/2,300,'lavabee','lvb1')
 		.setOrigin(0.5)
 
+		enemy.play('fly')
 		
 		this.add.image(WIDTH/2,50,'hpbar','B.png').setScale(2)
 		UI.panel.ehp = this.add.image(WIDTH/2,50,'hpbar','F.png').setScale(2)
@@ -209,14 +289,14 @@ export default class GUI extends Phaser.Scene{
 		UI.panel.hp = this.add.image(WIDTH/2,590,'hpbar','F.png').setScale(2)
 		this.add.image(WIDTH/2,590,'hpbar','M.png').setScale(2)
 
-		this.tweens.add(
-			{
-				targets:enemy,
-				rotation:enemy.rotation+1000,
-				duration:500000,
-				loop:true
-			}
-		)
+		// this.tweens.add(
+		// 	{
+		// 		targets:enemy,
+		// 		rotation:enemy.rotation+1000,
+		// 		duration:500000,
+		// 		loop:true
+		// 	}
+		// )
 
 		UI.panel.enemy = enemy
 		UI.panel.add(enemy)
@@ -257,7 +337,7 @@ export default class GUI extends Phaser.Scene{
 		for(let col = 0;col < 7;col++){
 			for(let row = 0;row < 4;row++){
 				const code = (++i + 64)
-				const letter = String.fromCharCode(code==91?45:code==92?32:code)
+				const letter = String.fromlavabeeCode(code==91?45:code==92?32:code)
 				this.create_key(row*(w+10)+5,col*(h+10)+5,w,h,letter)
 			}
 		}
@@ -316,9 +396,10 @@ export default class GUI extends Phaser.Scene{
 			this.update_hp()
 		});
 		
-		events.once("VICTORY",()=>{
-			this.display_victory()
+		events.once('level_done',()=>this.display_victory());
 
+		events.once("VICTORY",()=>{
+			this.hide_keyboard(()=>this.display_next());
 		});
 		events.once("DEFEAT",()=>{
 			this.display_defeat()
@@ -326,7 +407,7 @@ export default class GUI extends Phaser.Scene{
 	}
 	
 //###################
-	end_level(cb=()=>{}){
+	hide_keyboard(cb=()=>{}){
 		
 		const {keyboard} = UI
 		
@@ -343,18 +424,18 @@ export default class GUI extends Phaser.Scene{
 	//#################
 	display_victory(){
 		//todo victory animation
-		this.end_level(()=>this.display_next());
+		this.display_victory_panel()
 	}
 	
 	display_defeat(){
 		//todo victory animation
-		this.end_level(()=>this.display_defeat_panel());
+		this.display_defeat_panel()
 	}
 	
 	display_next(){
 
-		if(GAME.words.length<1)return
-		
+		if(GAME.words.length<1)return this.display_victory_panel()
+
 		const next = new Uis.Button(this,WIDTH/2,HEIGHT*4/5,400,150,0x6AAF9D)
 		.setScale(0,1)
 		

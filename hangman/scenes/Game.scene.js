@@ -33,9 +33,10 @@ export default class Game extends Phaser.Scene{
 		this.load.setPath('../../global_assets/music')
 		this.load.audio('fight','fight.wav')
 
-		//load img path
-		this.load.setPath('../../global_assets/img')
-		this.load.image('char','cyclone.png')
+		//load enemy atlas path
+		this.load.setPath('../../global_assets/img/lavabee')
+		
+		this.load.atlas('char','spritesheet.png','spritesheet.json')
 		
 		//load ui path
 		this.load.setPath('../../global_assets/img/ui')
@@ -51,7 +52,16 @@ export default class Game extends Phaser.Scene{
 	
 	create(){
 		console.log("hangman game start!!")
-		console.clear()
+		// console.clear()
+
+		
+		this.anims.create({
+			key:'fly',
+			frameRate:0.3,
+			frames:this.anims.generateFrameNumbers('lavabee',{prefix:'lvb1',end:5}),
+			repeat:-1
+		});
+
 		GUI = this.scene.get("GUI")
 		if(GUI)return this.init()
 	} 
@@ -67,7 +77,7 @@ export default class Game extends Phaser.Scene{
 		const game = await db.query_game(code)
 		words = [...game.words]
 
-		if(game.shuffle === 'true')words.shuffle()
+		if(game.shuffle && !(game.shuffle === 'false'))words.shuffle()
 		this.words = words
 
 		//player vars
@@ -86,7 +96,7 @@ export default class Game extends Phaser.Scene{
 	
 	fight(){
 
-		if(words.length<1)return
+		if(words.length<1)return 
 		this.lv++
 		const word = [...this.getWord(words)]
 		this.word = word
