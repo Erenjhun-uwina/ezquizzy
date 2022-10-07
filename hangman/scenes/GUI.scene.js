@@ -277,7 +277,7 @@ export default class GUI extends Phaser.Scene{
 
 		this.anims.create({
 			key:'fly',
-			frameRate:0.03,
+			frameRate:20,
 			frames:this.anims.generateFrameNames('lavabee',{prefix:'lvb',suffix:'.png',start:1,end:5}),
 			repeat:-1
 		});
