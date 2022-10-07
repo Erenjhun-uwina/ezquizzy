@@ -275,8 +275,14 @@ export default class GUI extends Phaser.Scene{
 		UI.panel = new Uis.Panel(this,20,20,WIDTH-40,600,0x355D68)
 		UI.panel.bg.setStrokeStyle(10,0x94C5AC)
 
+		this.anims.create({
+			key:'fly',
+			frameRate:0.03,
+			frames:this.anims.generateFrameNames('lavabee',{prefix:'lvb',suffix:'.png',start:1,end:5}),
+			repeat:-1
+		});
 
-		const enemy = this.add.image(WIDTH/2,300,'lavabee','lvb1')
+		const enemy = this.add.sprite(WIDTH/2,300,'lavabee','lvb1')
 		.setOrigin(0.5)
 
 		enemy.play('fly')
@@ -337,7 +343,7 @@ export default class GUI extends Phaser.Scene{
 		for(let col = 0;col < 7;col++){
 			for(let row = 0;row < 4;row++){
 				const code = (++i + 64)
-				const letter = String.fromlavabeeCode(code==91?45:code==92?32:code)
+				const letter = String.fromCharCode(code==91?45:code==92?32:code)
 				this.create_key(row*(w+10)+5,col*(h+10)+5,w,h,letter)
 			}
 		}

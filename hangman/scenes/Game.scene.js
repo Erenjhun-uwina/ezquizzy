@@ -36,7 +36,7 @@ export default class Game extends Phaser.Scene{
 		//load enemy atlas path
 		this.load.setPath('../../global_assets/img/lavabee')
 		
-		this.load.atlas('char','spritesheet.png','spritesheet.json')
+		this.load.atlas('lavabee','spritesheet.png','spritesheet.json')
 		
 		//load ui path
 		this.load.setPath('../../global_assets/img/ui')
@@ -44,9 +44,6 @@ export default class Game extends Phaser.Scene{
 		this.load.image("btn0_lowres","btn0_lowres.png")
 		this.load.image("btn1_lowres","btn1_lowres.png")
 
-		this.load.setPath('../../global_assets/img/ui/ehp')
-		this.load.atlas('ehp','spritesheet.png','spritesheet.json')
-		
 
 	}
 	
@@ -55,13 +52,7 @@ export default class Game extends Phaser.Scene{
 		// console.clear()
 
 		
-		this.anims.create({
-			key:'fly',
-			frameRate:0.3,
-			frames:this.anims.generateFrameNumbers('lavabee',{prefix:'lvb1',end:5}),
-			repeat:-1
-		});
-
+	
 		GUI = this.scene.get("GUI")
 		if(GUI)return this.init()
 	} 
