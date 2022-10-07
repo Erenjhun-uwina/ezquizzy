@@ -43,7 +43,7 @@ import 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js'
 		const game_details_close = $('#game_details_close ')[0]
 
 		game_details_close.onclick = ()=>{
-			game_details.style.translate = '0 -110% '
+			game_details.style.transform = 'scaleX(0)'
 		}
 
 		play_button.onclick = ()=>{
@@ -68,8 +68,8 @@ import 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js'
 					const title = e.dataset.title
 					const type = e.dataset.type
 
-					game_details.style.translate = '0 0 '
-					window.scrollTo(0, 0);
+					game_details.style.transform = 'scaleX(1)'
+					
 					
 					game_details_code.innerText = `code ${code}`
 					game_details_type.innerText = type
@@ -105,7 +105,7 @@ import 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js'
 		
 
 		create_bnt.onclick = (ev) => {
-			 game_select.style.transform = " translateY(0%)"
+			 game_details.style.transform = 'scaleX(1)'
 			 game_select.state = 'active'
 			 ev.stopPropagation()
 		}

@@ -192,16 +192,17 @@ h1{
 }
 
 #game_details{
-	margin: auto;
-	justify-content: center;
+	max-height: 50vw;
+	margin:auto;
 	user-select: none;
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
+	position: fixed;
+	top:0;
+	left:0;
 	right: 0;
-	translate: 0 -110%;
-	transition: 1s;
+	bottom: 0;
+	transform: scaleX(0);
+	transition:.3s;
+	z-index: 1000;
 }
 
 #game_details_img{
