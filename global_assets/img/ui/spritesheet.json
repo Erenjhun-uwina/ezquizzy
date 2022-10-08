@@ -4,7 +4,7 @@
 			"frame": {
 				"x": 0,
 				"y": 0,
-				"w": 300,
+				"w": 266,
 				"h": 50
 			},
 			"rotated": false,
@@ -12,11 +12,11 @@
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 300,
+				"w": 266,
 				"h": 50
 			},
 			"sourceSize": {
-				"w": 300,
+				"w": 266,
 				"h": 50
 			}
 		},
@@ -24,7 +24,7 @@
 			"frame": {
 				"x": 0,
 				"y": 50,
-				"w": 300,
+				"w": 266,
 				"h": 50
 			},
 			"rotated": false,
@@ -32,19 +32,39 @@
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 300,
+				"w": 266,
 				"h": 50
 			},
 			"sourceSize": {
-				"w": 300,
+				"w": 266,
+				"h": 50
+			}
+		},
+		"F_1.png": {
+			"frame": {
+				"x": 0,
+				"y": 100,
+				"w": 266,
+				"h": 50
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 266,
+				"h": 50
+			},
+			"sourceSize": {
+				"w": 266,
 				"h": 50
 			}
 		},
 		"M.png": {
 			"frame": {
 				"x": 0,
-				"y": 100,
-				"w": 300,
+				"y": 150,
+				"w": 276,
 				"h": 50
 			},
 			"rotated": false,
@@ -52,11 +72,11 @@
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 300,
+				"w": 276,
 				"h": 50
 			},
 			"sourceSize": {
-				"w": 300,
+				"w": 276,
 				"h": 50
 			}
 		}
@@ -67,8 +87,8 @@
 		"image": "spritesheet.png",
 		"format": "RGBA8888",
 		"size": {
-			"w": 300,
-			"h": 150
+			"w": 276,
+			"h": 200
 		},
 		"scale": "1"
 	}

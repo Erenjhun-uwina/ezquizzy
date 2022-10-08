@@ -6,7 +6,6 @@ import GUI from '../hangman/scenes/GUI.scene.js'
 import Screen from '../hangman/scenes/screen.scene.js'
 
 
-
 const config = {
     type:Phaser.WEBGL,
     width:920,

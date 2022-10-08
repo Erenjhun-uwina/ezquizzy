@@ -5,8 +5,10 @@ import "https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"
 import "https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"
 import generate_uc from './generate_ucode.js'
 
-let provider = new firebase.auth.GoogleAuthProvider(),
-	app
+let db,
+	app,
+	provider
+
 
 const firebaseConfig = {
 	apiKey: "AIzaSyBNgq_MFpErV5W1nm04geaIwDKMUps1MDw",
@@ -21,9 +23,12 @@ const firebaseConfig = {
 export default class DB {
 
 	constructor() {
-		if(!app)app = firebase.initializeApp(firebaseConfig);
+		if (db) return db
+		app = firebase.initializeApp(firebaseConfig);
 		this.db = firebase.firestore(app)
 		this.collection = this.db.collection("games")
+		provider = new firebase.auth.GoogleAuthProvider()
+
 	}
 
 

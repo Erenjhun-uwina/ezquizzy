@@ -26,16 +26,19 @@ export default class Game extends Phaser.Scene{
 			font:"5rem superstarregular",
 		}).
 		setOrigin(0.5)
-
 		
-
 		//load music path
 		this.load.setPath('../../global_assets/music')
 		this.load.audio('fight','fight.wav')
 
+
+		//
+		this.load.setPath('../../global_assets/img')
+		this.load.atlas('bonk','bonkfx.png','bonkfx.json')
+		
+
 		//load enemy atlas path
 		this.load.setPath('../../global_assets/img/lavabee')
-		
 		this.load.atlas('lavabee','spritesheet.png','spritesheet.json')
 		
 		//load ui path
@@ -43,16 +46,12 @@ export default class Game extends Phaser.Scene{
 		this.load.atlas('hpbar','spritesheet.png','spritesheet.json')
 		this.load.image("btn0_lowres","btn0_lowres.png")
 		this.load.image("btn1_lowres","btn1_lowres.png")
-
-
 	}
 	
 	create(){
 		console.log("hangman game start!!")
 		// console.clear()
 
-		
-	
 		GUI = this.scene.get("GUI")
 		if(GUI)return this.init()
 	} 
@@ -82,7 +81,7 @@ export default class Game extends Phaser.Scene{
 		//game
 		this.lv = 0
 		this.fight()
-		this.sound.play('fight')
+		this.sound.play('fight',{loop:true})
 	}
 	
 	fight(){
@@ -106,8 +105,7 @@ export default class Game extends Phaser.Scene{
 		//generate random letters besides the word's letters
 		const excess = this.shuffle_slice(word_keys,num_of_random_keys)
 		this.excess_keys = excess
-		
-		
+
 		GUI.scene.restart()
 	}
 	
@@ -125,7 +123,7 @@ export default class Game extends Phaser.Scene{
 		enemy.hp -= dmg
 		player.score += dmg
 		
-		this.events.emit("guessed",{guess:guessed})
+		this.events.emit("attack",{guess:guessed})
 		if(enemy.hp>0)return
 
 		player.hp = Math.min(player.hp += player.regen,player.mhp)
@@ -135,7 +133,7 @@ export default class Game extends Phaser.Scene{
 	defend(){
 	
 		player.hp -= 1
-		this.events.emit("failed_guess")
+		this.events.emit("defend")
 		if(player.hp<=0)this.events.emit("DEFEAT")
 	}
 	
