@@ -28,7 +28,6 @@ export default class DB {
 		this.db = firebase.firestore(app)
 		this.collection = this.db.collection("games")
 		provider = new firebase.auth.GoogleAuthProvider()
-
 	}
 
 

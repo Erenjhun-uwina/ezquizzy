@@ -46,6 +46,9 @@ export default class GUI extends Phaser.Scene {
 		this.fade()
 	}
 
+
+
+
 	/////
 	display_lv() {
 		UI.lv = this.add.text(
@@ -119,6 +122,8 @@ export default class GUI extends Phaser.Scene {
 		const { txt } = UI.blanks
 		txt.setText(guess.join(""))
 	}
+
+	//####################################################################
 
 	display_defeat_panel() {
 		const defeat = new Uis.Panel(this, WIDTH / 2, HEIGHT / 2, WIDTH - 40, 500, 0xB0294D)
@@ -201,6 +206,8 @@ export default class GUI extends Phaser.Scene {
 
 		this.fade()
 	}
+
+	//#################        end defeat display            #################
 
 
 	display_victory_panel() {
@@ -285,6 +292,8 @@ export default class GUI extends Phaser.Scene {
 
 		this.fade()
 	}
+
+	//#####################################################
 
 	display_visual_panel() {
 
@@ -414,12 +423,6 @@ export default class GUI extends Phaser.Scene {
 
 
 			const { enemy, fx } = UI.panel
-
-			//add a little randomness to bonkfx position
-			const amount = 60
-
-			fx.x = enemy.x + (Math.random()*3-1)*amount
-			fx.y = enemy.y + (Math.random()*2-1)*amount
 			fx.play('bonk')
 
 
@@ -448,17 +451,14 @@ export default class GUI extends Phaser.Scene {
 		});
 
 		events.on("defend", () => {
-
-			this.cameras.main.shake(100,0.03)
 			this.update_hp()
 		});
 
-		events.once("VICTORY", () => {
-			
-			//enemy faint anim
-			this.time.delayedCall(1500,()=>this.play_enemy_faint())
-		});
 
+
+		events.once("VICTORY", () => {
+			this.hide_keyboard(() => this.display_next());
+		});
 		events.once("DEFEAT", () => {
 			this.display_defeat()
 		});
@@ -576,32 +576,10 @@ export default class GUI extends Phaser.Scene {
 		});
 
 	}
-	//////////animations
 
-	play_enemy_faint(){
 
-		const {enemy} = UI.panel
 
-		// enemy.setTint(0x00)
-		this.tweens.addCounter({
-			from:255,
-			to:0,
-			duration:300,
-			onUpdate:(tween)=>{
-				const val = Math.floor(tween.getValue())
-				enemy.setTint(Phaser.Display.Color.GetColor(val,val,val))
-			}
-		})
 
-		this.tweens.add({
-			targets:enemy,
-			delay:310,
-			duration:1000,
-			ease:'Power1',
-			y:HEIGHT*1.3,
-			onComplete:()=>this.hide_keyboard(() => this.display_next())
-		});
-	}
 
 	create_anims() {
 		this.anims.create({
@@ -617,6 +595,10 @@ export default class GUI extends Phaser.Scene {
 			frames: this.anims.generateFrameNames('bonk', { prefix: 'b', start: 0, end: 7 })
 		});
 	}
+
+
+
+
 
 	fade(cb = () => { },) {
 		const { rt } = this

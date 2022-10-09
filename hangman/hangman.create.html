@@ -1,4 +1,3 @@
-
 <!-- 
 
 	TODO:add radio input for randomize trivia 
@@ -12,113 +11,117 @@
 
 
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>Hangman-create-EzQuizzy</title>
-		
-		<link rel="shortcut icon" href="./../favicon.ico" type="image/x-icon">
-		<link rel="icon" href="/favicon.ico" type="image/x-icon">
-		<link rel="stylesheet" href = "style/style.create.css">
-		<link rel="stylesheet" href="../global_style/style.global.css" >
-		
+<html lang="en-US">
+
+<head>
 	
-	
-	</head>
-	
-	<body>
-		
-		<form action="../create.success.html" >
-			<h1>Hangman</h1>
-			<h3>Game options</h3>
-			<label for="title" >title</label><br>
-			<input name="title" id="title" type="text" required><br><br>
-			
-			<label for="words">words</label>
-			<span class="tooltip">( format: word,word,etc...)  </span>
+
+	<title>Hangman-create-EzQuizzy</title>
+
+	<link rel="shortcut icon" href="./../favicon.ico" type="image/x-icon">
+	<link rel="icon" href="/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="style/style.create.css">
+	<link rel="stylesheet" href="../global_style/style.global.css">
+
+
+
+</head>
+
+<body>
+
+	<form action="../create.success.html">
+		<h1>Hangman</h1>
+		<h3>Game options</h3>
+		<label for="title">title</label><br>
+		<input name="title" id="title" type="text" required><br><br>
+
+		<label for="words">words</label>
+		<span class="tooltip">( format: word,word,etc...) </span>
+		<br>
+		<input name="words" id="words" required type="text"></input>
+
+		<div>
 			<br>
-			<input name="words" id="words" required  type="text"></input>
-			
-			<div>
-			<br>
-				<label>shuffle</label><br>
-				
-				<label for="shuffle">on</label>
-				<input type="radio" value="true"  name="shuffle" id="s1">
-				
-				<label for="shuffle">off</label>
-				<input type="radio" value="false"  name="shuffle" id="s0" checked>
-			</div>
-			
-			<div >
-				<label>difficulty</label>
-				<span class="tooltip">( how many random letters added to the choices )</span><br>
-				
-				<label for="r1">ez (5)</label>
-				<input name="difficulty" value="1"  type="radio" id="r1"  checked>
-				
-				<label for="r2">normal (10)</label>
-				<input name="difficulty" value="2" type="radio" id="r2">
+			<label>shuffle</label><br>
 
-				<label for="r3">boss (15)</label>
-				<input name="difficulty" value="3" type="radio" id="r3">
-			</div>
-			
+			<label for="shuffle">on</label>
+			<input type="radio" value="true" name="shuffle" id="s1">
 
-			
-			
-			<h3>Player options</h3>
-			
-			<label for="hp">health</label>
-			<span class="tooltip">( how many times a player can fail to guess before game over )</span>
-			<br>
-			<input name="hp" value="5"  id="hp" type="text"  required>
-			<br><br>
-			
-			<label for="regen">regen</label>
-			<span class="tooltip" >( how many points added to players hp every round )</span><br>
-			<input name="regen" value="5"  id="regen" type="text" required>
-			
-			<div id="btns"> 
-				<input type="submit" ><input type="reset" >
-			</div>
-		</form>
-		
-		<script type="module">
-			
-    		import DB from  "../global_js/database.js"
-			import generate_uc from "../global_js/generate_ucode.js"
-			
-			const submit_btn = document.querySelector("#btns input[type='submit']")
-			const form = document.querySelector("form")
-			const db = new DB
-			
-			
-			submit_btn.onclick =submit
-			
-			
-			async function submit(e){
-				
-				if(!form.checkValidity())return
-				
-				e.preventDefault()
+			<label for="shuffle">off</label>
+			<input type="radio" value="false" name="shuffle" id="s0" checked>
+		</div>
 
-				const fdata = new FormData(form)
-				
-				
-				let code = generate_uc('HM-')
+		<div>
+			<label>difficulty</label>
+			<span class="tooltip">( how many random letters added to the choices )</span><br>
 
-				fdata.append("code",code.split('-').join('').toLowerCase())
-				
-				
-				db.add_game(fdata)
+			<label for="r1">ez (5)</label>
+			<input name="difficulty" value="1" type="radio" id="r1" checked>
+
+			<label for="r2">normal (10)</label>
+			<input name="difficulty" value="2" type="radio" id="r2">
+
+			<label for="r3">boss (15)</label>
+			<input name="difficulty" value="3" type="radio" id="r3">
+		</div>
+
+
+
+
+		<h3>Player options</h3>
+
+		<label for="hp">health</label>
+		<span class="tooltip">( how many times a player can fail to guess before game over )</span>
+		<br>
+		<input name="hp" value="5" id="hp" type="text" required>
+		<br><br>
+
+		<label for="regen">regen</label>
+		<span class="tooltip">( how many points added to players hp every round )</span><br>
+		<input name="regen" value="5" id="regen" type="text" required>
+
+		<div id="btns">
+			<input type="submit"><input type="reset">
+		</div>
+	</form>
+
+	<script type="module">
+
+		import DB from "../global_js/database.js"
+		import generate_uc from "../global_js/generate_ucode.js"
+
+		const submit_btn = document.querySelector("#btns input[type='submit']")
+		const form = document.querySelector("form")
+		const db = new DB
+
+
+		submit_btn.onclick = submit
+
+
+		async function submit(e) {
+
+			if (!form.checkValidity()) return
+
+			e.preventDefault()
+
+			const fdata = new FormData(form)
+
+
+			let code = generate_uc('HM-')
+
+			fdata.append("code", code.split('-').join('').toLowerCase())
+
+
+			db.add_game(fdata)
 				.then(
-					()=>window.location = "../create.success.html?code=" + code+'&title='+fdata.get('title')
-			
-				);
-				
+					() => window.location = "../create.success.html?code=" + code + '&title=' + fdata.get('title')
 
-			}
-			
-		</script>
-	</body>
+				);
+
+
+		}
+
+	</script>
+</body>
+
 </html>

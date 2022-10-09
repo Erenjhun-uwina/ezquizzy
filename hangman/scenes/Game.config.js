@@ -1,9 +1,9 @@
 
 
 
-import Game from '../hangman/scenes/Game.scene.js'
-import GUI from '../hangman/scenes/GUI.scene.js'
-import Screen from '../hangman/scenes/screen.scene.js'
+import Game from './Game.scene.js'
+import GUI from './GUI.scene.js'
+import Screen from './screen.scene.js'
 
 
 const config = {
@@ -15,7 +15,7 @@ const config = {
         autoCenter:Phaser.Scale.CENTER_BOTH
     },
     backgroundColor:'#1B1E34',
-    scene:[Game,GUI,Screen]
+    scene:[Game,GUI]
     
 }
 

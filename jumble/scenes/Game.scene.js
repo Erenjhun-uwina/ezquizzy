@@ -8,8 +8,7 @@ let WIDTH,
 	words,
 	player = {},
 	enemy = {},
-	initialized,
-	txts
+	initialized
 
 import DB from "../../global_js/database.js"
 const db = new DB
@@ -23,11 +22,10 @@ export default class Game extends Phaser.Scene {
 	preload() {
 		WIDTH = this.game.canvas.width
 		HEIGHT = this.game.canvas.height
-		
-		txts = this.add.text(WIDTH / 2, HEIGHT / 2, "LOADING....", {
+		this.add.text(WIDTH / 2, HEIGHT / 2, "LOADING....", {
 			font: "5rem superstarregular",
-		}).setOrigin(0.5)
-
+		}).
+			setOrigin(0.5)
 
 		//load music path
 		this.load.setPath('../../global_assets/music')
@@ -50,28 +48,15 @@ export default class Game extends Phaser.Scene {
 		this.load.image("btn1_lowres", "btn1_lowres.png")
 	}
 
-
-
 	create() {
 		console.log("hangman game start!!")
-		console.clear()
-
-		txts.setText('start').setDepth(2)
-		this.add.image(WIDTH/2,HEIGHT/2,'btn0_lowres').setOrigin(0.5,0.45)
+		// console.clear()
 
 		GUI = this.scene.get("GUI")
-
-
-		window.onclick = ()=>user_start(this)
-
-		function user_start(s){
-			if (!GUI) return GUI = this.scene.get("GUI")
-			s._init()
-			window.onclick = null
-		}
+		if (GUI) return this.init()
 	}
 
-	async _init() {
+	async init() {
 		if (initialized) return
 		initialized = true
 
@@ -177,7 +162,6 @@ export default class Game extends Phaser.Scene {
 		return rand_keys.slice(0, num).concat(keys).concat(["A", "O", "E"])
 	}
 }
-
 
 
 Array.prototype.shuffle = function () {

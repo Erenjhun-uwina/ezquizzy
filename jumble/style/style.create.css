@@ -1,8 +1,8 @@
 
 @font-face {
     font-family: 'superstarregular';
-    src: url('/global_style/superstar_memesbruh03-webfont.woff2') format('woff2'),
-    url('../global_style/superstar_memesbruh03-webfont.woff') format('woff');
+    src: url('../../global_style/superstar_memesbruh03-webfont.woff2') format('woff2'),
+    url('../../global_style/superstar_memesbruh03-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
     
@@ -21,10 +21,11 @@
     
     form{ 
         
-        width: 920px;
+        max-width: 920px;
+        width: 80vw;
         height: auto;
         margin:2rem auto;
-        padding:6rem;
+        padding:4rem;
         background:#93BFA6;   
         box-shadow: 15px 15px  #1E1126;
         border-radius:10px;
