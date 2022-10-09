@@ -60,19 +60,19 @@ export default class Game extends Phaser.Scene {
 		GUI = this.scene.get("GUI")
 
 
-		window.onclick = ()=>user_start(this)
+		window.onpointerup = ()=>user_start(this)
+	
 
 		function user_start(s){
 			if (!GUI) return GUI = this.scene.get("GUI")
-			s._init()
 			window.onclick = null
+			s._init()
 		}
 	}
 
 	async _init() {
 		if (initialized) return
 		initialized = true
-
 
 		const url = new URLSearchParams(window.location.search);
 		const code = url.get("code").split('-').join('').toLowerCase()
@@ -122,7 +122,7 @@ export default class Game extends Phaser.Scene {
 		this.events.off('fight')
 		this.events.off('defend')
 
-		GUI = this.scene.get("GUI")
+		GUI = this.scene.start('GUI')
 	}
 
 	attack(key) {
