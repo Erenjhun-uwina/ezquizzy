@@ -33,7 +33,6 @@ export default class Game extends Phaser.Scene {
 		this.load.setPath('../../global_assets/music')
 		this.load.audio('fight', 'fight.wav')
 
-
 		//
 		this.load.setPath('../../global_assets/img')
 		this.load.atlas('bonk', 'bonkfx.png', 'bonkfx.json')
@@ -49,7 +48,6 @@ export default class Game extends Phaser.Scene {
 		this.load.image("btn0_lowres", "btn0_lowres.png")
 		this.load.image("btn1_lowres", "btn1_lowres.png")
 	}
-
 
 
 	create() {
@@ -121,7 +119,10 @@ export default class Game extends Phaser.Scene {
 		const excess = this.shuffle_slice(word_keys, num_of_random_keys)
 		this.excess_keys = excess
 
-		GUI.scene.restart()
+		this.events.off('fight')
+		this.events.off('defend')
+
+		GUI = this.scene.get("GUI")
 	}
 
 	attack(key) {

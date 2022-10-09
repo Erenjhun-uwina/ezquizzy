@@ -23,6 +23,7 @@ export default class GUI extends Phaser.Scene {
 		GAME = this.scene.get("Game")
 		screen = this.scene.get('Screen')
 		this.display_UIs()
+		this.init_events()
 	}
 
 
@@ -34,7 +35,7 @@ export default class GUI extends Phaser.Scene {
 		this.display_visual_panel()
 		this.display_blank_panel(word)
 		this.display_keyboard()
-		this.init_events()
+
 		this.display_lv()
 		this.display_hp()
 		this.display_ehp()
@@ -418,45 +419,54 @@ export default class GUI extends Phaser.Scene {
 			//add a little randomness to bonkfx position
 			const amount = 60
 
-			fx.x = enemy.x + (Math.random()*3-1)*amount
-			fx.y = enemy.y + (Math.random()*2-1)*amount
+			fx.x = enemy.x + (Math.random() * 3 - 1) * amount
+			fx.y = enemy.y + (Math.random() * 2 - 1) * amount
 			fx.play('bonk')
 
 
 			enemy.setTint(0xff0000)
-			enemy.setScale(0.85)
 
-			this.time.delayedCall(
-				100, () => {
-					enemy.setTint(0xffffff)
-					enemy.setScale(1.1)
-				}
-			);
+			const timeline = this.tweens.createTimeline()
 
-			this.time.delayedCall(
-				200, () => {
-					enemy.setTint(0xff0000)
-					enemy.setScale(0.90)
-				}
-			);
-			this.time.delayedCall(
-				400, () => {
-					enemy.setTint(0xffffff)
-					enemy.setScale(1)
-				}
-			);
+			timeline.add({
+				targets: enemy,
+				scaleX: 0.8,
+				scaleY: 1,
+				tint: { from: 0xff0000, to: 0xffffff },
+				angle: 30 * (Math.random() < 0.5 ? -1 : 1),
+				duration: 100
+			});
+
+			timeline.add({
+				targets: enemy,
+				scaleX: 1.1,
+				scaleY: 0.8,
+				angle: 0,
+				tint: { from: 0xffffff, to: 0xff0000 },
+				duration: 100,
+				ease: 'Power2'
+			});
+
+			timeline.add({
+				targets: enemy,
+				scaleX: 1,
+				scaleY: 1,
+				tint: { from: 0xff0000, to: 0xffffff },
+				duration: 100
+			});
+
+	
+			timeline.play()
 		});
 
 		events.on("defend", () => {
 
-			this.cameras.main.shake(100,0.03)
+			this.cameras.main.shake(100, 0.03)
 			this.update_hp()
 		});
 
 		events.once("VICTORY", () => {
-			
-			//enemy faint anim
-			this.time.delayedCall(1500,()=>this.play_enemy_faint())
+			this.time.delayedCall(1500, () => this.play_enemy_faint())
 		});
 
 		events.once("DEFEAT", () => {
@@ -522,7 +532,7 @@ export default class GUI extends Phaser.Scene {
 			ease: "Bounce"
 		});
 
-		next.on("click", () => {
+		next.once("click", () => {
 
 			this.fade(() => { GAME.fight() })
 
@@ -578,28 +588,28 @@ export default class GUI extends Phaser.Scene {
 	}
 	//////////animations
 
-	play_enemy_faint(){
+	play_enemy_faint() {
 
-		const {enemy} = UI.panel
+		const { enemy } = UI.panel
 
 		// enemy.setTint(0x00)
 		this.tweens.addCounter({
-			from:255,
-			to:0,
-			duration:300,
-			onUpdate:(tween)=>{
+			from: 255,
+			to: 0,
+			duration: 300,
+			onUpdate: (tween) => {
 				const val = Math.floor(tween.getValue())
-				enemy.setTint(Phaser.Display.Color.GetColor(val,val,val))
+				enemy.setTint(Phaser.Display.Color.GetColor(val, val, val))
 			}
 		})
 
 		this.tweens.add({
-			targets:enemy,
-			delay:310,
-			duration:1000,
-			ease:'Power1',
-			y:HEIGHT*1.3,
-			onComplete:()=>this.hide_keyboard(() => this.display_next())
+			targets: enemy,
+			delay: 310,
+			duration: 1000,
+			ease: 'Power1',
+			y: HEIGHT * 1.3,
+			onComplete: () => this.hide_keyboard(() => this.display_next())
 		});
 	}
 
