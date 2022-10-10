@@ -61,7 +61,7 @@ export default class GUI extends Phaser.Scene {
 		UI.hp = this.add.text(
 			35, 550, "HP:0", { font: "2.5rem superstarregular" }
 		)
-		this.update_hp()
+		this.update_hp(false)
 	}
 
 	display_ehp() {
@@ -73,7 +73,7 @@ export default class GUI extends Phaser.Scene {
 		this.update_ehp()
 	}
 
-	update_hp() {
+	update_hp(animate = true) {
 		const php = UI.hp
 		php.setText(`HP:${GAME.player.hp}`)
 
@@ -81,8 +81,10 @@ export default class GUI extends Phaser.Scene {
 
 		php.setText(`HP:${hp}`)
 		const hp_percent = 1.95 * hp / mhp
+		
 		UI.panel.hp.setScale(hp_percent, 2)
 
+		if(!animate)return
 		this.tweens.add({
 			targets: UI.panel.hp_1,
 			scaleX: hp_percent,
