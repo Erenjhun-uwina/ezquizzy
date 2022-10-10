@@ -3,7 +3,7 @@
 
 import Game from './Game.scene.js'
 import GUI from './GUI.scene.js'
-import Screen from './screen.scene.js'
+
 
 
 const config = {
