@@ -2,10 +2,11 @@
 
 	TODO:add radio input for randomize trivia 
 	po copy nalng ung sa shuffle palitan nio nalang
-
 	///
 	
-	
+	 
+	chek box
+	label survival():
 
  -->
 
@@ -14,7 +15,9 @@
 <html lang="en-US">
 
 <head>
-	
+	<meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Content-Type" content="text/html" charset="utf-8">
 
 	<title>Hangman-create-EzQuizzy</title>
 
@@ -22,8 +25,6 @@
 	<link rel="icon" href="/favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" href="style/style.create.css">
 	<link rel="stylesheet" href="../global_style/style.global.css">
-
-
 
 </head>
 
@@ -44,12 +45,18 @@
 			<br>
 			<label>shuffle</label><br>
 
-			<label for="shuffle">on</label>
-			<input type="radio" value="true" name="shuffle" id="s1">
+			<!-- papalit ng  type =checkbox -->
 
-			<label for="shuffle">off</label>
-			<input type="radio" value="false" name="shuffle" id="s0" checked>
+			<label for="shuffle">on</label>
+			<input type="checkbox" value="true" name="shuffle" id="shuffle">
+
+			<label for="survival">on</label>
+			<input type="checkbox" value="true" name="true" id="survival">
+		
+			<label for="trivia">on</label>
+			<input type="checkbox" value="true" name="trivia" id="trivia">
 		</div>
+		<!--  -->
 
 		<div>
 			<label>difficulty</label>
@@ -71,6 +78,7 @@
 		<h3>Player options</h3>
 
 		<label for="hp">health</label>
+		<!-- eto ung sample ng tooltip -->
 		<span class="tooltip">( how many times a player can fail to guess before game over )</span>
 		<br>
 		<input name="hp" value="5" id="hp" type="text" required>
