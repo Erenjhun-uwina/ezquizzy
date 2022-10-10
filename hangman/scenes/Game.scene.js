@@ -30,7 +30,7 @@ export default class Game extends Phaser.Scene {
 
 
 		//load music path
-		this.load.setPath('global_assets/music')
+		this.load.setPath('./global_assets/music')
 		this.load.audio('fight', 'fight.wav')
 
 		//
@@ -43,7 +43,7 @@ export default class Game extends Phaser.Scene {
 		this.load.atlas('lavabee', 'spritesheet.png', 'spritesheet.json')
 
 		//load ui path
-		this.load.setPath('global_assets/img/ui')
+		this.load.setPath('./global_assets/img/ui')
 		this.load.atlas('hpbar', 'spritesheet.png', 'spritesheet.json')
 		this.load.image("btn0_lowres", "btn0_lowres.png")
 		this.load.image("btn1_lowres", "btn1_lowres.png")
