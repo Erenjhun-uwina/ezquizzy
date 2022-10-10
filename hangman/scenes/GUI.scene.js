@@ -83,8 +83,9 @@ export default class GUI extends Phaser.Scene {
 		const hp_percent = 1.95 * hp / mhp
 		
 		UI.panel.hp.setScale(hp_percent, 2)
+		
 
-		if(!animate)return
+		if(!animate)return UI.panel.hp_1.setScale(hp_percent, 2)
 		this.tweens.add({
 			targets: UI.panel.hp_1,
 			scaleX: hp_percent,
