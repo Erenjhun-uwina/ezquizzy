@@ -119,9 +119,6 @@ export default class Game extends Phaser.Scene {
 		const excess = this.shuffle_slice(word_keys, num_of_random_keys)
 		this.excess_keys = excess
 
-		this.events.off('fight')
-		this.events.off('defend')
-		console.log('???????????????');
 		GUI = this.scene.start('GUI')
 	}
 

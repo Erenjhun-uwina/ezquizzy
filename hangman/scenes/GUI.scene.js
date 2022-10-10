@@ -406,7 +406,8 @@ export default class GUI extends Phaser.Scene {
 
 	init_events() {
 		const { events } = GAME
-
+		events.off('attack')
+		events.off('defend')
 		events.on("attack", (data) => {
 			this.update_blanks(data.guess)
 			this.update_ehp()
@@ -454,7 +455,7 @@ export default class GUI extends Phaser.Scene {
 				duration: 100
 			});
 
-	
+			console.log('attttacks')
 			timeline.play()
 		});
 
@@ -465,6 +466,7 @@ export default class GUI extends Phaser.Scene {
 		});
 
 		events.once("VICTORY", () => {
+			this.disble_buttons()
 			this.time.delayedCall(1500, () => this.play_enemy_faint())
 		});
 
@@ -472,6 +474,7 @@ export default class GUI extends Phaser.Scene {
 			this.display_defeat()
 		});
 	}
+
 
 	//###################
 	hide_keyboard(cb = () => { }) {
@@ -486,6 +489,14 @@ export default class GUI extends Phaser.Scene {
 			ease: "Power2",
 			onComplete: cb()
 		});
+	}
+
+	disble_buttons(){
+		for(const btn of UI.keyboard.list ){
+			if(btn.constructor.name != 'Button')continue
+			if(!btn.is_enabled)continue
+			btn.disable()
+		}
 	}
 
 	//#################
@@ -602,9 +613,7 @@ export default class GUI extends Phaser.Scene {
 			}
 		})
 
-		for(const btn of UI.keyboard.list ){
-			console.log(btn)
-		}
+		
 
 		this.tweens.add({
 			targets: enemy,

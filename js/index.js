@@ -32,7 +32,8 @@ import DB from '../global_js/database.js'
     			game_not_exists()
     			return
     		}
-			location.href = "../hangman/index.hangman.html?code="+code
+			console.log('plaayy');
+			location.href = "hangman/index.hangman.html?code="+code
 		} 
     	
     	function game_not_exists(){
@@ -53,15 +54,13 @@ import DB from '../global_js/database.js'
 		play_button.onclick = ()=>{
 			
 			const code = play_button.dataset.code
-			location.href = "../hangman/index.hangman.html?code="+code
+			location.href = "hangman/index.hangman.html?code="+code
 		}
 
 		const game_details_code = document.querySelector('#game_details_code')
 		const game_details_type = document.querySelector('#game_details_type')
 		const game_details_title = document.querySelector('#game_details_title')
 
-		
-		console.log(game_details_code)
 
     	suggestion_btns.forEach(
     		e=> {

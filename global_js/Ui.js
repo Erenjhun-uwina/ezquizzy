@@ -91,4 +91,7 @@ export class Button extends UI{
 		this.emit("disabled")
 	}
 	
+	get is_enabled(){
+		return this._enabled
+	}
 }
