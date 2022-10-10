@@ -1,5 +1,5 @@
 import DB from '../global_js/database.js'   
-import 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js' 	
+
     	
     	const play_btn = document.querySelector(".play")
     	const code_input = document.querySelector(".txt") 
@@ -32,7 +32,7 @@ import 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js'
     			game_not_exists()
     			return
     		}
-			window.location = "../hangman/index.hangman.html?code="+code
+			location.href = "../hangman/index.hangman.html?code="+code
 		} 
     	
     	function game_not_exists(){
@@ -41,10 +41,10 @@ import 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js'
     	
     	
     	const suggestion_btns = document.querySelectorAll(".game_suggestion")
-    	const game_details = $('#game_details ')[0]
-		const play_button = $('#play_button')[0]
+    	const game_details = document.querySelector('#game_details ') 
+		const play_button = document.querySelector('#play_button') 
 
-		const game_details_close = $('#game_details_close ')[0]
+		const game_details_close = document.querySelector('#game_details_close ') 
 
 		game_details_close.onclick = ()=>{
 			game_details.style.transform = 'scaleX(0)'
@@ -53,7 +53,7 @@ import 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js'
 		play_button.onclick = ()=>{
 			
 			const code = play_button.dataset.code
-			window.location = "../hangman/index.hangman.html?code="+code
+			location.href = "../hangman/index.hangman.html?code="+code
 		}
 
 		const game_details_code = document.querySelector('#game_details_code')
@@ -92,7 +92,7 @@ import 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js'
 
 				e.onclick = ()=>{
 					const type =  e.dataset.type
-					window.location = `${type}/${type}.create.html`
+					location.href = `${type}/${type}.create.html`
 				}
 			}
 		)
@@ -103,8 +103,8 @@ import 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js'
 		const game_select = document.querySelector('#gametype_select')
     	const create_bnt =  document.querySelector('.create')
 		const profile_img = document.querySelector('#profile_img')
-		const profile_con = $('#profile_con')[0]
-		const logout_btn = $('#profile_con ')[0]
+		const profile_con = document.querySelector('#profile_con') 
+		const logout_btn = document.querySelector('#profile_con ') 
 		
 
 		create_bnt.onclick = (ev) => {

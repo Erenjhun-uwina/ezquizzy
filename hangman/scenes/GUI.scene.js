@@ -21,7 +21,6 @@ export default class GUI extends Phaser.Scene {
 		WIDTH = this.game.canvas.width
 		HEIGHT = this.game.canvas.height
 		GAME = this.scene.get("Game")
-		screen = this.scene.get('Screen')
 		this.display_UIs()
 		this.init_events()
 	}
@@ -602,6 +601,10 @@ export default class GUI extends Phaser.Scene {
 				enemy.setTint(Phaser.Display.Color.GetColor(val, val, val))
 			}
 		})
+
+		for(const btn of UI.keyboard.list ){
+			console.log(btn)
+		}
 
 		this.tweens.add({
 			targets: enemy,
