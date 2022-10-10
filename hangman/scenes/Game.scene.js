@@ -52,7 +52,7 @@ export default class Game extends Phaser.Scene {
 
 	create() {
 		console.log("hangman game start!!")
-		console.clear()
+		
 
 		txts.setText('start').setDepth(2)
 		this.add.image(WIDTH/2,HEIGHT/2,'btn0_lowres').setOrigin(0.5,0.45)
