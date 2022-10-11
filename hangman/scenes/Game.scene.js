@@ -6,6 +6,8 @@ let WIDTH,
 	HEIGHT,
 	GUI,
 	words,
+	trivias,
+	hints,
 	player = {},
 	enemy = {},
 	initialized,
@@ -76,12 +78,14 @@ export default class Game extends Phaser.Scene {
 		
 		const url = new URLSearchParams(window.location.search);
 		const code = url.get("code").split('-').join('').toLowerCase()
-
 		const game = await db.query_game(code)
-		words = [...game.words]
 
+		words = [...game.words]
 		if (game.shuffle && !(game.shuffle === 'false')) words.shuffle()
-		this.words = words
+		// this.words = words
+
+		trivias = [...game.trivias || [] ]
+		hints = [...game.hints || [] ]
 
 		//player vars
 		this.player = player
@@ -164,7 +168,7 @@ export default class Game extends Phaser.Scene {
 		//returns a uppercased word then removes it from the list
 		const nw = words.splice(0, 1)
 		const ucw = nw[0].toUpperCase()
-
+		
 		return ucw
 	}
 
