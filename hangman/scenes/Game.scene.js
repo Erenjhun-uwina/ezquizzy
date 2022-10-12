@@ -10,11 +10,14 @@ let WIDTH,
 	hints,
 	player = {},
 	enemy = {},
-	initialized,
+	// initialized,
 	txts
 
 import DB from "../../global_js/database.js"
+
 const db = new DB
+
+
 
 export default class Game extends Phaser.Scene {
 
@@ -73,16 +76,13 @@ export default class Game extends Phaser.Scene {
 
 	async _init() {
 		
-		if (initialized) return
-		initialized = true
-		
 		const url = new URLSearchParams(window.location.search);
 		const code = url.get("code").split('-').join('').toLowerCase()
 		const game = await db.query_game(code)
 
 		words = [...game.words]
 		if (game.shuffle && !(game.shuffle === 'false')) words.shuffle()
-		// this.words = words
+		this.words = words
 
 		trivias = [...game.trivias || [] ]
 		hints = [...game.hints || [] ]

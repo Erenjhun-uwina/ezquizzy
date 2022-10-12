@@ -1,9 +1,12 @@
 console.log("database loaded: " + window.location)
 
+
 import "https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"
 import "https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"
 import "https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"
 import generate_uc from './generate_ucode.js'
+
+if (!firebase) alert('cannot connect to server\nplease check your internet connection\n-EzQuizyy')
 
 let db,
 	app,
@@ -23,6 +26,7 @@ const firebaseConfig = {
 export default class DB {
 
 	constructor() {
+		
 		if (db) return db
 		app = firebase.initializeApp(firebaseConfig);
 		this.db = firebase.firestore(app)
