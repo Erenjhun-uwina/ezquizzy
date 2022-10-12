@@ -107,6 +107,8 @@ export default class Game extends Phaser.Scene {
 		this.lv++
 		const word = [...this.getWord(words)]
 		this.word = word
+		this.trivia = trivias.splice(0, 1)
+		this.hint = hints.splice(0, 1)
 
 		enemy.mhp = word.length
 		enemy.hp = word.length
