@@ -132,11 +132,12 @@ export default class GUI extends Phaser.Scene {
 
 		const panel = new Uis.Panel(this , 20, 20, WIDTH - 40, HEIGHT-40, 0xB0294D)
 		
-		const txt = this.add.text(WIDTH/2, 40, `trivia:\n${GAME.trivia}`,
+		const txt = this.add.text(WIDTH/2,HEIGHT/2, ` ${GAME.trivia}`,
 		{
 			font: ` 4rem superstarregular`,
 			color: '#F2DB94',
-			wordWrap:'auto'
+			align:'center',
+			wordWrap: { width: WIDTH - 40}
 		})
 		.setOrigin(0.5)
 		
@@ -389,7 +390,7 @@ export default class GUI extends Phaser.Scene {
 	create_key(x, y, w, h, c) {
 
 		const excess_keys = GAME.excess_keys
-		//console.log("excess:"+excess_keys.join(""))
+		
 
 		let btn = new Uis.Button(this, x, y, w, h, 0xD9667B)
 		const txt = this.add.text(btn.w / 2, btn.h / 2, c,

@@ -64,9 +64,9 @@ export default class Game extends Phaser.Scene {
 
 		window.onpointerup = ()=>this.user_start()
 	}
+	
 	user_start(){
 
-		console.log(this);
 		if (!GUI) return GUI = this.scene.get("GUI")
 		window.onpointerup = null
 		this._init()
@@ -79,7 +79,7 @@ export default class Game extends Phaser.Scene {
 		const game = await db.query_game(code)
 
 		words = [...game.words]
-		console.log(game)
+		// console.log(game)
 		
 		if (game.shuffle && !(game.shuffle === 'false')) words.shuffle()
 		this.words = [...words]
@@ -103,11 +103,14 @@ export default class Game extends Phaser.Scene {
 		if (words.length < 1) return
 		this.lv++
 		const word_hint_trivia = [...this.split_words_comp(words)]
-		
+
 		this.word =  [...word_hint_trivia[0]]
-		this.trivia =  word_hint_trivia[1]
-		console.log(this.trivia)
-		this.hint =  word_hint_trivia[2]
+
+		this.hint =  word_hint_trivia[1]
+		// console.log('hint:',this.hint)
+
+		this.trivia =  word_hint_trivia[2]
+		// console.log('trivia:',this.trivia)
 
 		const word = this.word
 
