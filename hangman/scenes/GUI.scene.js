@@ -291,7 +291,7 @@ export default class GUI extends Phaser.Scene {
 			wordWrap:{width:50},
 			align:'center'
 		}
-		).setOrigin(0.5, 0)
+		).setOrigin(0.5, 0).setDepth(1000)
 
 		GAME.player.hp = 1
 		this.update_blanks(GAME.word)
