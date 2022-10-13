@@ -660,14 +660,8 @@ export default class GUI extends Phaser.Scene {
 
 		next.once("click", () => {
 
-			this.fade(() => { GAME.fight() })
-
-			this.tweens.add({
-				targets: next,
-				scaleX: 0,
-				duration: 200,
-				ease: "Bounce",
-			});
+			GAME.fight() 
+		
 		});
 
 	}
