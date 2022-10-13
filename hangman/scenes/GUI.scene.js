@@ -608,7 +608,7 @@ export default class GUI extends Phaser.Scene {
 
 		if (GAME.words.length < 1) return this.display_victory()
 
-		const next = new Uis.Button(this, WIDTH / 2, HEIGHT * 4 / 5, 400, 150, 0x6AAF9D)
+		const next = new Uis.Button(this, WIDTH / 2, HEIGHT * 4 / 5, 400, 150, 0x345c6c)
 			.setScale(0, 1)
 
 		next.bg.setOrigin(0.5)
