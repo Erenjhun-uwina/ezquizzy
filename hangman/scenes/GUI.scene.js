@@ -615,7 +615,7 @@ export default class GUI extends Phaser.Scene {
 		if (!escape) {
 			if (GAME.trivia) this.display_trivia()
 		}
-		
+
 		if (GAME.words.length < 1) return this.display_victory()
 
 		const next = new Uis.Button(this, WIDTH / 2, HEIGHT * 4 / 5, 400, 150, 0x345c6c)
@@ -633,7 +633,6 @@ export default class GUI extends Phaser.Scene {
 			.setOrigin(0.5)
 			.setDepth(1000)
 			.setShadow(3, 3, "#355D68")
-
 		next.add(txt)
 
 		this.tweens.add({
