@@ -285,10 +285,10 @@ export default class GUI extends Phaser.Scene {
 			duration: 300
 		})
 
-		const txt = this.add.text(WIDTH / 2, HEIGHT / 4, ' luckily you have escaped...\n\n\n click to continue',
+		const txt = this.add.text(WIDTH / 2, HEIGHT / 4, ' luckily...\n you have escaped...\n\n\n click to continue',
 		{ 
 			font: '3rem superstarregular',
-			wordWrap:{width:50},
+			wordWrap:{width:20},
 			align:'center'
 		}
 		).setOrigin(0.5, 0).setDepth(1000)
@@ -646,7 +646,7 @@ export default class GUI extends Phaser.Scene {
 
 		if(escape){
 
-			this.rt.once("click", () => {
+			this.rt.once("pointerup", () => {
 
 				this.fade(() => { 
 					this.display_next()
