@@ -159,6 +159,7 @@ export default class GUI extends Phaser.Scene {
 
 	toggle_hint(state = true) {
 		const { hint } = UI
+		if(!hint) return
 		if (hint._state == 'inactive' && state) {
 			hint.setScale(1, 1)
 			hint._state = 'active'
@@ -285,7 +286,7 @@ export default class GUI extends Phaser.Scene {
 			duration: 300
 		})
 
-		const txt = this.add.text(WIDTH / 2, HEIGHT / 5, ' luckily...\n you have escaped...',
+		const txt = this.add.text(WIDTH / 2, HEIGHT / 5, ' luckily you have escaped...',
 		{ 
 			font: '3rem superstarregular',
 			wordWrap:{width:20},
@@ -615,9 +616,10 @@ export default class GUI extends Phaser.Scene {
 		if (!escape) {
 			if (GAME.trivia) this.display_trivia()
 		}
+		if(!this._fade_state)this.fade()
 
 		if (GAME.words.length < 1) return this.display_victory()
-
+		
 		const next = new Uis.Button(this, WIDTH / 2, HEIGHT * 4 / 5, 400, 150, 0x345c6c)
 			.setScale(0, 1)
 
@@ -642,28 +644,26 @@ export default class GUI extends Phaser.Scene {
 			ease: "Bounce"
 		});
 
-		if(escape){
-
+		if(!escape  || !GAME.trivia){
 			next.once("click", () => {
-
-				
-				this.fade(()=>{
-					this.display_next()
-					this.fade()
-				})
-			
-				this.tweens.add({
-					targets: next,
-					scaleX: 0,
-					duration: 200,
-					ease: "Bounce",
-				});
+				this.fade(()=>GAME.fight())
 			});
 			return
 		}
 
+		
 		next.once("click", () => {
-			this.fade(()=>GAME.fight())
+				
+			this.fade(()=>{
+				this.display_next(false)
+			})
+		
+			this.tweens.add({
+				targets: next,
+				scaleX: 0,
+				duration: 200,
+				ease: "Bounce",
+			});
 		});
 
 	}
@@ -683,8 +683,8 @@ export default class GUI extends Phaser.Scene {
 				font: "50px superstarregular",
 				color: "#FFEB99"
 			})
-			.setOrigin(0.5)
-			.setShadow(3, 3, "#355D68")
+		.setOrigin(0.5)
+		.setShadow(3, 3, "#355D68")
 
 		next.add(txt)
 
