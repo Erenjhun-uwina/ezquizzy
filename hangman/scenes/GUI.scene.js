@@ -290,7 +290,7 @@ export default class GUI extends Phaser.Scene {
 			{fontStyle:'7rem superstarregular'}
 		).setOrigin(0.5,0)
 		
-		GAME.hp = 1
+		GAME.player.hp = 1
 		this.update_blanks(GAME.word)
 		this.hide_keyboard()
 		this.display_next(true)
