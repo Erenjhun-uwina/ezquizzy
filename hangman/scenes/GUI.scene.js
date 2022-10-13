@@ -137,8 +137,9 @@ export default class GUI extends Phaser.Scene {
 			font: ` 2rem superstarregular`,
 			color: '#F2DB94'
 		})
-		.setOrigin(0)
-		.setShadow(10, 10, "#355D68")
+		
+
+		
 	}
 
 	display_defeat_panel() {
