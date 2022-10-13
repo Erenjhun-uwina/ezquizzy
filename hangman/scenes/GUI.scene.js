@@ -142,7 +142,6 @@ export default class GUI extends Phaser.Scene {
 				wordWrap: { width: WIDTH - 60, useAdvancedWrap: true }
 			})
 			.setOrigin(0.5)
-			.setShadow(w_size / 7, w_size / 7, "#C24B6E")
 			.setPadding(10, 10)
 
 		const hint_txt_indicator = this.add.text((WIDTH - 40) / 2, 20, 'hint:',
