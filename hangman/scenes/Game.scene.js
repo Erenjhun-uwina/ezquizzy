@@ -80,11 +80,8 @@ export default class Game extends Phaser.Scene {
 		const code = url.get("code").split('-').join('').toLowerCase()
 		const game = await db.query_game(code)
 
-		const word_hint_trivia = game.words.split(',')
+		const words = game.words.split(',')
 		
-		words =  [...word_hint_trivia[0]]
-		hints = [...word_hint_trivia[1]]
-		trivias = [...word_hint_trivia[2]]
 
 		if (game.shuffle && !(game.shuffle === 'false')) words.shuffle()
 		this.words = words
@@ -109,10 +106,11 @@ export default class Game extends Phaser.Scene {
 		console.log('fight')
 		if (words.length < 1) return
 		this.lv++
-		const word = [...this.getWord(words)]
-		this.word = word
-		this.trivia = trivias.splice(0, 1)
-		this.hint = hints.splice(0, 1)
+		const word_hint_trivia = [...this.split_words_comp(words)]
+		
+		this.word =  word_hint_trivia[0]
+		this.trivia =  word_hint_trivia[1]
+		this.hint =  word_hint_trivia[2]
 
 		enemy.mhp = word.length
 		enemy.hp = word.length
@@ -169,13 +167,18 @@ export default class Game extends Phaser.Scene {
 		this.attack(key)
 	}
 
-	getWord(words) {
+	split_words_comp(words) {
 
 		//returns a uppercased word then removes it from the list
 		const nw = words.splice(0, 1)
-		const ucw = nw[0].toUpperCase()
+
+		const w_h_t = nw.split('/')
 		
-		return ucw
+		const w = w_h_t[0].toUpperCase()
+
+
+		
+		return [w,w_h_t[1],w_h_t[2]]
 	}
 
 
