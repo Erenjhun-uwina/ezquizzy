@@ -285,7 +285,7 @@ export default class GUI extends Phaser.Scene {
 			duration: 300
 		})
 
-		const txt = this.add.text(WIDTH / 2, HEIGHT / 4, ' luckily...\n you have escaped...\n\n\n click to continue',
+		const txt = this.add.text(WIDTH / 2, HEIGHT / 5, ' luckily...\n you have escaped...',
 		{ 
 			font: '3rem superstarregular',
 			wordWrap:{width:20},
@@ -615,8 +615,6 @@ export default class GUI extends Phaser.Scene {
 		if (!escape) {
 			if (GAME.trivia) this.display_trivia()
 			if (GAME.words.length < 1) return this.display_victory()
-		}else{
-			this.fade()
 		}
 
 		const next = new Uis.Button(this, WIDTH / 2, HEIGHT * 4 / 5, 400, 150, 0x345c6c)
@@ -646,14 +644,17 @@ export default class GUI extends Phaser.Scene {
 
 		if(escape){
 
-			this.rt.once("pointerup", () => {
+			next.once("click", () => {
 
-				this.fade(() => { 
-					this.display_next()
-					this.fade()
-				})
+				this.fade(() => { this.display_next() })
+	
+				this.tweens.add({
+					targets: next,
+					scaleX: 0,
+					duration: 200,
+					ease: "Bounce",
+				});
 			});
-
 			return
 		}
 
