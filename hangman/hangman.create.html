@@ -36,27 +36,30 @@
 		<label for="title">title</label><br>
 		<input name="title" id="title" type="text" required><br><br>
 
-		<label for="words">words</label>
-		<span class="tooltip">( format: word,word,etc...) </span>
+		<label for="words">word/hint/trivia</label>
+		<span class="tooltip">( format: words/hint/trivia , words/hint/trivia , etc...) </span>
 		<br>
 		<input name="words" id="words" required type="text"></input>
 
 		<div>
 			<br>
-			<label>shuffle</label><br>
-
+			
 			<!-- papalit ng  type =checkbox -->
 
-			<label for="shuffle">on</label>
-			<input type="checkbox" value="true" name="shuffle" id="shuffle">
+			
+			<input type="checkbox" value="true" name="shuffle" >
+			<label for="shuffle">shuffle</label>
+			<br>
+			<input type="checkbox" value="true" name="survival">
+			<label for="survival">survival</label>
 
-			<label for="survival">on</label>
-			<input type="checkbox" value="true" name="true" id="survival">
-		
-			<label for="trivia">on</label>
-			<input type="checkbox" value="true" name="trivia" id="trivia">
+			<br>
+			<input type="checkbox" value="true" name="rand_trivia" >
+			<label for="trivia">display random trivia</label>
+
 		</div>
 		<!--  -->
+		<br>
 
 		<div>
 			<label>difficulty</label>
@@ -120,12 +123,15 @@
 			fdata.append("code", code.split('-').join('').toLowerCase())
 
 
+			for(const e of fdata.entries()){
+				console.log(e);
+			}
+
+			return
 			db.add_game(fdata)
 				.then(
 					() => window.location = "../create.success.html?code=" + code + '&title=' + fdata.get('title')
-
 				);
-
 
 		}
 

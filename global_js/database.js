@@ -42,6 +42,8 @@ export default class DB {
 			hp = fdata.get("hp"),
 			regen = fdata.get("regen"),
 			shuffle = fdata.get("shuffle"),
+			survival = fdata.get("survival"),
+			rand_trivia = fdata.get("rand_trivia"),
 			code = fdata.get('code').split('-').join('').toLowerCase()
 
 
@@ -52,6 +54,8 @@ export default class DB {
 				title: title,
 				regen: regen,
 				shuffle: shuffle === 'true',
+				rand_trivia: rand_trivia === 'true',
+				survival: survival === 'true',
 				words: words,
 				difficulty: difficulty
 			})
