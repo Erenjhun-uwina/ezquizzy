@@ -63,7 +63,7 @@ export default class GUI extends Phaser.Scene {
 	}
 
 	update_hp(animate = true) {
-		this.toggle_hint()
+		this.toggle_hint(false)
 		const php = UI.hp
 		php.setText(`HP:${GAME.player.hp}`)
 
@@ -84,14 +84,13 @@ export default class GUI extends Phaser.Scene {
 		});
 	}
 
-
 	update_lv() {
 		const { lv } = UI
 		lv.setText(`lv:${GAME.lv}`)
 	}
 
 	update_ehp() {
-		this.toggle_hint()
+		this.toggle_hint(false)
 		const { ehp } = UI
 		const { mhp, hp } = GAME.enemy
 
@@ -159,9 +158,9 @@ export default class GUI extends Phaser.Scene {
 		UI.hint.add(hint_txt_indicator)
 	}
 
-	toggle_hint() {
+	toggle_hint(state = true) {
 		const { hint } = UI
-		if (hint._state == 'inactive') {
+		if (hint._state == 'inactive' && state){
 			hint.setScale(1, 1)
 			hint._state = 'active'
 			return
