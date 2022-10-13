@@ -136,7 +136,7 @@ export default class GUI extends Phaser.Scene {
 		const hint_txt = this.add.text((WIDTH - 40) / 2, 120, word,
 			{
 				font: ` ${w_size}px superstarregular`,
-				color: "#FFEB99",
+				color: "#345c6c",
 				align: "center",
 				baseLineY: '10px',
 				wordWrap: { width: WIDTH - 60, useAdvancedWrap: true }
