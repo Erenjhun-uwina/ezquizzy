@@ -80,12 +80,16 @@ export default class Game extends Phaser.Scene {
 		const code = url.get("code").split('-').join('').toLowerCase()
 		const game = await db.query_game(code)
 
-		words = [...game.words]
+		const word_hint_trivia = game.words.split(',')
+		
+		words =  [...word_hint_trivia[0]]
+		hints = [...word_hint_trivia[1]]
+		trivias = [...word_hint_trivia[2]]
+
 		if (game.shuffle && !(game.shuffle === 'false')) words.shuffle()
 		this.words = words
 
-		trivias = [...game.trivias || [] ]
-		hints = [...game.hints || [] ]
+		
 
 		//player vars
 		this.player = player

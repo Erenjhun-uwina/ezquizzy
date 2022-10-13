@@ -12,7 +12,6 @@ let db,
 	app,
 	provider
 
-
 const firebaseConfig = {
 	apiKey: "AIzaSyBNgq_MFpErV5W1nm04geaIwDKMUps1MDw",
 	authDomain: "ezquizzy-b9179.firebaseapp.com",

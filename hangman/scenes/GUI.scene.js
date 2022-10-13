@@ -123,11 +123,25 @@ export default class GUI extends Phaser.Scene {
 		txt.setText(guess.join(""))
 	}
 
+	display_hint(){
+
+	}
+
 	display_trivia(){
-		const panel = new Uis.Panel(this, WIDTH / 2, HEIGHT / 2, WIDTH - 40, HEIGHT-40, 0xB0294D)
+		// pa adjust ng size (this,x,y,width,height,color)
+
+		const panel = new Uis.Panel(this , WIDTH / 2 , HEIGHT / 2, WIDTH - 40, HEIGHT-40, 0xB0294D)
 		const dropshadow = this.add.rectangle(20, 25, WIDTH - 40, 500, 0x000)
 			.setOrigin(0.5, 0)
 			.setDepth(103)
+		
+		const txt = this.add.text(0, 0, `trivia:${GAME.trivia}`,
+		{
+			font: ` 2rem superstarregular`,
+			color: '#F2DB94'
+		})
+		.setOrigin(0.5)
+		.setShadow(10, 10, "#355D68")
 	}
 
 	display_defeat_panel() {
@@ -525,6 +539,8 @@ export default class GUI extends Phaser.Scene {
 	}
 
 	display_next() {
+
+		if(GAME.trivia != '')this.display_trivia()
 
 		if (GAME.words.length < 1) return this.display_victory()
 
