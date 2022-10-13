@@ -287,7 +287,7 @@ export default class GUI extends Phaser.Scene {
 
 		const txt = this.add.text(WIDTH / 2, HEIGHT / 4, ' luckily you have escaped...\n\n\n click to continue',
 		{ 
-			font: '5rem superstarregular',
+			font: '3rem superstarregular',
 			wordWrap:{width:50},
 			align:'center'
 		}
@@ -646,7 +646,7 @@ export default class GUI extends Phaser.Scene {
 
 		if(escape){
 
-			UI.fade.once("click", () => {
+			this.rt.once("click", () => {
 
 				this.fade(() => { 
 					this.display_next()
