@@ -132,7 +132,7 @@ export default class GUI extends Phaser.Scene {
 
 		const panel = new Uis.Panel(this , WIDTH / 2 , HEIGHT / 2, WIDTH - 40, HEIGHT-40, 0xB0294D)
 		const dropshadow = this.add.rectangle(20, 25, WIDTH - 40, 500, 0x000)
-			.setOrigin(0.5, 0)
+			.setOrigin(0.5)
 			.setDepth(103)
 		
 		const txt = this.add.text(0, 0, `trivia:${GAME.trivia}`,
