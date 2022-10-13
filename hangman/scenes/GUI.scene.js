@@ -632,6 +632,7 @@ export default class GUI extends Phaser.Scene {
 				color: "#FFEB99"
 			})
 			.setOrigin(0.5)
+			.setDepth(1000)
 			.setShadow(3, 3, "#355D68")
 
 		next.add(txt)
