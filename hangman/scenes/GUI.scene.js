@@ -291,7 +291,7 @@ export default class GUI extends Phaser.Scene {
 			wordWrap:{width:20},
 			align:'center'
 		}
-		).setOrigin(0.5, 0).setDepth(1000)
+		).setOrigin(0.5, 0)
 
 		GAME.player.hp = 1
 		this.update_blanks(GAME.word)
@@ -614,8 +614,9 @@ export default class GUI extends Phaser.Scene {
 
 		if (!escape) {
 			if (GAME.trivia) this.display_trivia()
-			if (GAME.words.length < 1) return this.display_victory()
 		}
+		
+		if (GAME.words.length < 1) return this.display_victory()
 
 		const next = new Uis.Button(this, WIDTH / 2, HEIGHT * 4 / 5, 400, 150, 0x345c6c)
 			.setScale(0, 1)
@@ -646,7 +647,7 @@ export default class GUI extends Phaser.Scene {
 
 			next.once("click", () => {
 
-				this.fade(() => { this.display_next() })
+				this.fade(() => { this.display_next()})
 	
 				this.tweens.add({
 					targets: next,
