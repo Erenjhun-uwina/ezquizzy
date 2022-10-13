@@ -172,7 +172,7 @@ export default class GUI extends Phaser.Scene {
 	display_trivia() {
 		// pa adjust ng size (this,x,y,width,height,color)
 
-		const panel = new Uis.Panel(this, 10, 10, WIDTH - 20, HEIGHT - 20, 0xEC9A6D)
+		const panel = new Uis.Panel(this, 10, 10, WIDTH - 20, HEIGHT - 20, 0x201834)
 		let fontSize = 200
 
 		const txt = this.add.text(WIDTH / 2 + 10, HEIGHT * 2 / 5, `did you know?\n${GAME.trivia}`,
@@ -185,7 +185,7 @@ export default class GUI extends Phaser.Scene {
 
 			})
 			.setOrigin(0.5)
-			.setShadow(5, 10, "#C24B6E")
+			.setShadow(5, 10, "#241424")
 
 
 		while (txt.height > HEIGHT / 3) {
