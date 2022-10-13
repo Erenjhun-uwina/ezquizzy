@@ -287,7 +287,7 @@ export default class GUI extends Phaser.Scene {
 
 		const txt = this.add.text(WIDTH / 2, HEIGHT / 4, ' luckily you have escaped...',
 		{ 
-			font: '7rem superstarregular',
+			font: '5rem superstarregular',
 			wordWrap:{width:50},
 			align:'center'
 		}
@@ -615,6 +615,8 @@ export default class GUI extends Phaser.Scene {
 		if (!escape) {
 			if (GAME.trivia) this.display_trivia()
 			if (GAME.words.length < 1) return this.display_victory()
+		}else{
+			this.fade()
 		}
 
 		const next = new Uis.Button(this, WIDTH / 2, HEIGHT * 4 / 5, 400, 150, 0x345c6c)
