@@ -136,7 +136,7 @@ export default class GUI extends Phaser.Scene {
 		const hint_txt = this.add.text((WIDTH - 40) / 2, 120, word,
 			{
 				font: ` ${w_size}px superstarregular`,
-				color: "#FFEB99",
+				color: "#345c6c",
 				align: "center",
 				baseLineY: '10px',
 				wordWrap: { width: WIDTH - 60, useAdvancedWrap: true }
@@ -613,7 +613,7 @@ export default class GUI extends Phaser.Scene {
 
 		if (GAME.words.length < 1) return this.display_victory()
 
-		const next = new Uis.Button(this, WIDTH / 2, HEIGHT * 4 / 5, 400, 150, 0x6AAF9D)
+		const next = new Uis.Button(this, WIDTH / 2, HEIGHT * 4 / 5, 400, 150, 0x345c6c)
 			.setScale(0, 1)
 
 		next.bg.setOrigin(0.5)
