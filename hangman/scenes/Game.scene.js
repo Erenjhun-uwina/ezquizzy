@@ -47,9 +47,7 @@ export default class Game extends Phaser.Scene {
 
 		//load ui path
 		this.load.setPath('../global_assets/img/ui')
-		this.load.atlas('hpbar', 'spritesheet.png', 'spritesheet.json')
-		this.load.image("btn0_lowres", "btn0_lowres.png")
-		this.load.image("btn1_lowres", "btn1_lowres.png")
+		this.load.atlas('ui','spritesheet.png', 'spritesheet.json')
 	}
 
 
@@ -58,7 +56,7 @@ export default class Game extends Phaser.Scene {
 		
 
 		txts.setText('start').setDepth(2)
-		this.add.image(WIDTH/2,HEIGHT/2,'btn0_lowres').setOrigin(0.5,0.45)
+		this.add.image(WIDTH/2,HEIGHT/2,'ui','btn0_lowres').setOrigin(0.5,0.45)
 
 		GUI = this.scene.get("GUI")
 
@@ -107,10 +105,10 @@ export default class Game extends Phaser.Scene {
 		this.word =  [...word_hint_trivia[0]]
 
 		this.hint =  word_hint_trivia[1]
-		 console.log('hint:',this.hint)
+		
 
 		this.trivia =  word_hint_trivia[2]
-		console.log('trivia:',this.trivia)
+		
 
 		const word = this.word
 

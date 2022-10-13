@@ -69,7 +69,7 @@ export default class GUI extends Phaser.Scene {
 		const { mhp, hp } = GAME.player
 
 		php.setText(`HP:${hp}`)
-		const hp_percent = 1.95 * hp / mhp
+		const hp_percent = 2 * hp / mhp
 		
 		UI.panel.hp.setScale(hp_percent, 2)
 		
@@ -93,7 +93,7 @@ export default class GUI extends Phaser.Scene {
 		const { mhp, hp } = GAME.enemy
 
 		ehp.setText(`HP:${hp}`)
-		const hp_percent = 1.95 * hp / mhp
+		const hp_percent = 2 * hp / mhp
 		UI.panel.ehp.setScale(hp_percent, 2)
 
 		this.tweens.add({
@@ -117,7 +117,7 @@ export default class GUI extends Phaser.Scene {
 		UI.hint._state = 'inactive'
 		UI.hint.setScale(0,1)
 
-		UI.hint_icon = this.add.circle(60, 680,30,0xfffff).setInteractive()
+		UI.hint_icon = this.add.circle(80, 700,40).setInteractive()
 		.on('pointerup', () => {
 
 			const {hint} = UI
@@ -131,6 +131,8 @@ export default class GUI extends Phaser.Scene {
 			hint._state = 'inactive'
 		}
 		);
+		
+		this.add.image(80, 700,'ui','hint')
 
 
 		let word = GAME.hint
@@ -138,7 +140,6 @@ export default class GUI extends Phaser.Scene {
 		let w_size = w_len < 8 ? 90 : (WIDTH) / w_len * 1.4
 
 		
-
 		const hint_txt = this.add.text((WIDTH - 40) / 2, 120, word,
 			{
 				font: ` ${w_size}px superstarregular`,
@@ -172,7 +173,7 @@ export default class GUI extends Phaser.Scene {
 	display_trivia(){
 		// pa adjust ng size (this,x,y,width,height,color)
 
-		const panel = new Uis.Panel(this,10, 10, WIDTH-20, HEIGHT-20, 0xB0294D)
+		const panel = new Uis.Panel(this,10, 10, WIDTH-20, HEIGHT-20, 0xEC9A6D)
 		let fontSize = 200
 
 		const txt = this.add.text(WIDTH/2+10, HEIGHT*2/5, `did you know?\n${GAME.trivia}`,
@@ -185,7 +186,7 @@ export default class GUI extends Phaser.Scene {
 			
 		})
 		.setOrigin(0.5)
-		.setShadow(10, 10, "#355D68")
+		.setShadow(5, 10, "#C24B6E")
 
 		
 		while(txt.height > HEIGHT/3){
@@ -382,15 +383,15 @@ export default class GUI extends Phaser.Scene {
 
 		//adding the hp bars to the visua panel
 		// enemy
-		this.add.image(WIDTH / 4, 50, 'hpbar', 'B.png').setScale(2).setOrigin(0, 0.5)
-		UI.panel.ehp_1 = this.add.image(WIDTH / 4 + 1, 50, 'hpbar', 'F.png').setScale(1.95, 2).setOrigin(0, 0.5)
-		UI.panel.ehp = this.add.image(WIDTH / 4 + 1, 50, 'hpbar', 'F_1.png').setOrigin(0, 0.5)
-		this.add.image(WIDTH / 4, 50, 'hpbar', 'M.png').setScale(1.9).setOrigin(0, 0.5)
+		this.add.image(WIDTH / 4 + 11, 50, 'ui', 'B').setScale(2).setOrigin(0, 0.5)
+		UI.panel.ehp_1 = this.add.image(WIDTH / 4 + 11, 50, 'ui', 'F').setScale( 2).setOrigin(0, 0.5)
+		UI.panel.ehp = this.add.image(WIDTH / 4 + 11, 50, 'ui', 'F_1').setOrigin(0, 0.5)
+		this.add.image(WIDTH / 4, 50, 'ui', 'M').setScale(2).setOrigin(0, 0.5)
 		//player
-		this.add.image(WIDTH / 4, 590, 'hpbar', 'B.png').setScale(2).setOrigin(0, 0.5)
-		UI.panel.hp_1 = this.add.image(WIDTH / 4 + 1, 590, 'hpbar', 'F_1.png').setScale(1.95, 2).setOrigin(0, 0.5)
-		UI.panel.hp = this.add.image(WIDTH / 4 + 1, 590, 'hpbar', 'F.png').setOrigin(0, 0.5)
-		this.add.image(WIDTH / 4, 590, 'hpbar', 'M.png').setScale(1.9).setOrigin(0, 0.5)
+		this.add.image(WIDTH / 4+ 11, 590, 'ui', 'B').setScale(2).setOrigin(0, 0.5)
+		UI.panel.hp_1 = this.add.image(WIDTH / 4 + 11, 590, 'ui', 'F_1').setScale(2).setOrigin(0, 0.5)
+		UI.panel.hp = this.add.image(WIDTH / 4 + 11, 590, 'ui', 'F').setOrigin(0, 0.5)
+		this.add.image(WIDTH / 4, 590, 'ui', 'M').setScale(2).setOrigin(0, 0.5)
 
 		UI.panel.enemy = enemy
 		UI.panel.add(enemy)
@@ -458,13 +459,13 @@ export default class GUI extends Phaser.Scene {
 		btn.val = c
 		btn.txt = txt
 		btn.once("click", click)
-		btn.set_bg(this.add.image(-3, 0, "btn1_lowres").setOrigin(0).setScale(0.65))
+		btn.set_bg(this.add.image(-3, 0,'ui',"btn1_lowres").setOrigin(0).setScale(0.65))
 		btn.add(txt)
 
 
 		btn.once("disabled", () => {
 			const { txt, bg } = btn
-			btn.set_bg(this.add.image(-3, 0, "btn0_lowres").setOrigin(0).setScale(0.65))
+			btn.set_bg(this.add.image(-3, 0,'ui',"btn0_lowres").setOrigin(0).setScale(0.65))
 			btn.moveUp(txt.setColor("#B0294D"))
 			btn.txt.setShadow(0, 0)
 		});
