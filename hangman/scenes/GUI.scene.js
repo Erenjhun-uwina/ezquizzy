@@ -2,19 +2,12 @@
 import * as Uis from '../../global_js/Ui.js'
 import Screen from './Screen.scene.js'
 
-let WIDTH, HEIGHT, GAME,
-	UI,
-	screen
-
-
+let WIDTH, HEIGHT, GAME,UI
 
 export default class GUI extends Phaser.Scene {
-
-
 	constructor() {
 		super("GUI")
 	}
-
 
 	create() {
 		UI = {}//resets UI
@@ -25,14 +18,13 @@ export default class GUI extends Phaser.Scene {
 		this.init_events()
 	}
 
-
-
 	display_UIs() {
 
 		const word = GAME.guessed
 		this.create_anims()
 		this.display_visual_panel()
 		this.display_blank_panel(word)
+		this.display_hint()
 		this.display_keyboard()
 
 		this.display_lv()
@@ -46,7 +38,6 @@ export default class GUI extends Phaser.Scene {
 		this.fade()
 	}
 
-	/////
 	display_lv() {
 		UI.lv = this.add.text(
 			35, 30, "lv:0", { font: "2.5rem superstarregular", color: 'black' }
@@ -56,8 +47,6 @@ export default class GUI extends Phaser.Scene {
 	}
 
 	display_hp() {
-
-
 		UI.hp = this.add.text(
 			35, 550, "HP:0", { font: "2.5rem superstarregular" }
 		)
@@ -115,8 +104,6 @@ export default class GUI extends Phaser.Scene {
 		});
 	}
 
-
-	/////////
 	update_blanks(guess) {
 
 		const { txt } = UI.blanks
@@ -125,6 +112,31 @@ export default class GUI extends Phaser.Scene {
 
 	display_hint(){
 
+		UI.hint_icon = this.add.circle(20,20,20,0xfffff)
+		UI.hint = new Uis.Panel(this, 20, 640, WIDTH - 40, 240, 0xEC9A6D)
+		UI.hint.bg.setStrokeStyle(10, 0xFFEB99)
+
+		let word = GAME.hint
+		let w_len = word.length
+		let w_size = w_len < 8 ? 90 : (WIDTH) / w_len * 1.4
+
+		const blank_txt = this.add.text((WIDTH - 40) / 2, 120, word,
+			{
+				font: ` ${w_size}px superstarregular`,
+				color: "#FFEB99",
+				align: "center",
+				wordWrap: { width: WIDTH - 60, useAdvancedWrap: true }
+			})
+			.setOrigin(0.5)
+			.setShadow(5, 10, "#C24B6E")
+
+		UI.hint.add(blank_txt)
+		// UI.hint.txt = blank_txt
+	}
+
+	show_hint(){
+		const { hint } = UI
+		hint.setScale(1,1)
 	}
 
 	display_trivia(){
