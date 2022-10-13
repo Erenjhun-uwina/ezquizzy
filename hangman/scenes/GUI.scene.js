@@ -286,7 +286,11 @@ export default class GUI extends Phaser.Scene {
 		})
 
 		const txt = this.add.text(WIDTH / 2, HEIGHT / 4, ' luckily you have escaped...',
-			{ fontStyle: '10rem superstarregular' }
+		{ 
+			font: '7rem superstarregular',
+			wordWrap:{width:50},
+			align:'center'
+		}
 		).setOrigin(0.5, 0)
 
 		GAME.player.hp = 1
