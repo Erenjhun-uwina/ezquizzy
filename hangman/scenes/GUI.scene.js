@@ -287,7 +287,7 @@ export default class GUI extends Phaser.Scene {
 		})
 
 		const txt = this.add.text(WIDTH / 2, HEIGHT / 4, ' luckily you have escaped...',
-			{ fontStyle: '7rem superstarregular' }
+			{ fontStyle: '10rem superstarregular' }
 		).setOrigin(0.5, 0)
 
 		GAME.player.hp = 1
@@ -642,7 +642,10 @@ export default class GUI extends Phaser.Scene {
 
 			next.once("click", () => {
 
-				this.fade(() => { this.display_next() })
+				this.fade(() => { 
+					this.display_next()
+					this.fade()
+				})
 	
 				this.tweens.add({
 					targets: next,
