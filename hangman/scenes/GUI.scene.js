@@ -192,8 +192,6 @@ export default class GUI extends Phaser.Scene {
 			fontSize = fontSize * 0.95
 			txt.setFontSize(fontSize + 'px')
 		}
-
-
 	}
 
 	display_defeat_panel() {
@@ -288,8 +286,14 @@ export default class GUI extends Phaser.Scene {
 			duration:300
 		})
 
-		const txt = this.add.text(WIDTH/2,HEIGHT/4,' luckily you have escaped...')
+		const txt = this.add.text(WIDTH/2,HEIGHT/4,' luckily you have escaped...',
+			{fontStyle:'7rem superstarregular'}
+		).setOrigin(0.5,0)
+		
 		GAME.hp = 1
+		this.update_blanks(GAME.word)
+		this.hide_keyboard()
+		this.display_next(true)
 	}
 
 	display_victory_panel() {
@@ -602,8 +606,9 @@ export default class GUI extends Phaser.Scene {
 		this.time.delayedCall(1500, () => this.display_defeat_panel())
 	}
 
-	display_next() {
-
+	display_next(escape) {
+		
+		if(escape)return this.display_next()
 		if (GAME.trivia) this.display_trivia()
 
 		if (GAME.words.length < 1) return this.display_victory()
