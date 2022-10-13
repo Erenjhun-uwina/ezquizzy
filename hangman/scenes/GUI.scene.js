@@ -160,7 +160,7 @@ export default class GUI extends Phaser.Scene {
 
 	toggle_hint(state = true) {
 		const { hint } = UI
-		if (hint._state == 'inactive' && state){
+		if (hint._state == 'inactive' && state) {
 			hint.setScale(1, 1)
 			hint._state = 'active'
 			return
@@ -276,20 +276,20 @@ export default class GUI extends Phaser.Scene {
 		this.fade()
 	}
 
-	escape(){
-		const panel = new Uis.Panel(this, 20, 20, WIDTH - 40, 600, 0x355D68).setScale(0,1)
+	escape() {
+		const panel = new Uis.Panel(this, 20, 20, WIDTH - 40, 600, 0x355D68).setScale(0, 1)
 		panel.bg.setStrokeStyle(10, 0x94C5AC)
 
 		this.tweens.add({
-			targets:panel,
-			scaleX:1,
-			duration:300
+			targets: panel,
+			scaleX: 1,
+			duration: 300
 		})
 
-		const txt = this.add.text(WIDTH/2,HEIGHT/4,' luckily you have escaped...',
-			{fontStyle:'7rem superstarregular'}
-		).setOrigin(0.5,0)
-		
+		const txt = this.add.text(WIDTH / 2, HEIGHT / 4, ' luckily you have escaped...',
+			{ fontStyle: '7rem superstarregular' }
+		).setOrigin(0.5, 0)
+
 		GAME.player.hp = 1
 		this.update_blanks(GAME.word)
 		this.hide_keyboard()
@@ -563,7 +563,7 @@ export default class GUI extends Phaser.Scene {
 		});
 
 		events.once("DEFEAT", () => {
-			if( !GAME.survival ) return this.escape()
+			if (!GAME.survival) return this.escape()
 			this.display_defeat()
 		});
 	}
@@ -607,11 +607,12 @@ export default class GUI extends Phaser.Scene {
 	}
 
 	display_next(escape) {
-		
-		if(escape)return this.display_next()
-		if (GAME.trivia) this.display_trivia()
 
-		if (GAME.words.length < 1) return this.display_victory()
+
+		if (!escape) {
+			if (GAME.trivia) this.display_trivia()
+			if (GAME.words.length < 1) return this.display_victory()
+		}
 
 		const next = new Uis.Button(this, WIDTH / 2, HEIGHT * 4 / 5, 400, 150, 0x345c6c)
 			.setScale(0, 1)
@@ -636,6 +637,23 @@ export default class GUI extends Phaser.Scene {
 			duration: 300,
 			ease: "Bounce"
 		});
+
+		if(escape){
+
+			next.once("click", () => {
+
+				this.fade(() => { this.display_next() })
+	
+				this.tweens.add({
+					targets: next,
+					scaleX: 0,
+					duration: 200,
+					ease: "Bounce",
+				});
+			});
+
+			return
+		}
 
 		next.once("click", () => {
 
