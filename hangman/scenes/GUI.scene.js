@@ -130,16 +130,26 @@ export default class GUI extends Phaser.Scene {
 	display_trivia(){
 		// pa adjust ng size (this,x,y,width,height,color)
 
-		const panel = new Uis.Panel(this , 20, 20, WIDTH - 40, HEIGHT-40, 0xB0294D)
-		
-		const txt = this.add.text(WIDTH/2,HEIGHT/2, ` ${GAME.trivia}`,
+		const panel = new Uis.Panel(this ,10, 10, WIDTH-20, HEIGHT-20, 0xB0294D)
+		let fontSize = 200
+
+		const txt = this.add.text(WIDTH/2 , HEIGHT*2/5, ` did you know?\n${GAME.trivia}`,
 		{
-			font: ` 4rem superstarregular`,
+			fontFamily: `superstarregular`,
+			fontSize:'150px',
 			color: '#F2DB94',
 			align:'center',
-			wordWrap: { width: WIDTH - 40}
+			wordWrap: { width: WIDTH - 20},
+			
 		})
 		.setOrigin(0.5)
+		.setShadow(10, 10, "#355D68")
+
+		
+		while(txt.height > HEIGHT/3){
+			fontSize = fontSize*0.95
+			txt.setFontSize(fontSize+'px')
+		}
 		
 
 	}
@@ -391,6 +401,7 @@ export default class GUI extends Phaser.Scene {
 
 		const excess_keys = GAME.excess_keys
 		
+		
 
 		let btn = new Uis.Button(this, x, y, w, h, 0xD9667B)
 		const txt = this.add.text(btn.w / 2, btn.h / 2, c,
@@ -430,8 +441,7 @@ export default class GUI extends Phaser.Scene {
 
 	init_events() {
 		const { events } = GAME
-		events.off('attack')
-		events.off('defend')
+		
 		events.on("attack", (data) => {
 			this.update_blanks(data.guess)
 			this.update_ehp()
@@ -479,7 +489,6 @@ export default class GUI extends Phaser.Scene {
 				duration: 100
 			});
 
-			console.log('attttacks')
 			timeline.play()
 		});
 
@@ -498,7 +507,6 @@ export default class GUI extends Phaser.Scene {
 			this.display_defeat()
 		});
 	}
-
 
 	//###################
 	hide_keyboard(cb = () => { }) {
@@ -540,7 +548,7 @@ export default class GUI extends Phaser.Scene {
 
 	display_next() {
 
-		if(GAME.trivia != '')this.display_trivia()
+		if(GAME.trivia)this.display_trivia()
 
 		if (GAME.words.length < 1) return this.display_victory()
 
