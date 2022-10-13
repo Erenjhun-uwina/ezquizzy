@@ -14,9 +14,7 @@ let WIDTH,
 	txts
 
 import DB from "../../global_js/database.js"
-
 const db = new DB
-
 
 
 export default class Game extends Phaser.Scene {
