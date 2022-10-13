@@ -2,7 +2,7 @@
 import * as Uis from '../../global_js/Ui.js'
 import Screen from './Screen.scene.js'
 
-let WIDTH, HEIGHT, GAME,UI
+let WIDTH, HEIGHT, GAME, UI
 
 export default class GUI extends Phaser.Scene {
 	constructor() {
@@ -63,6 +63,7 @@ export default class GUI extends Phaser.Scene {
 	}
 
 	update_hp(animate = true) {
+		this.toggle_hint()
 		const php = UI.hp
 		php.setText(`HP:${GAME.player.hp}`)
 
@@ -70,11 +71,11 @@ export default class GUI extends Phaser.Scene {
 
 		php.setText(`HP:${hp}`)
 		const hp_percent = 2 * hp / mhp
-		
-		UI.panel.hp.setScale(hp_percent, 2)
-		
 
-		if(!animate)return UI.panel.hp_1.setScale(hp_percent, 2)
+		UI.panel.hp.setScale(hp_percent, 2)
+
+
+		if (!animate) return UI.panel.hp_1.setScale(hp_percent, 2)
 		this.tweens.add({
 			targets: UI.panel.hp_1,
 			scaleX: hp_percent,
@@ -83,12 +84,14 @@ export default class GUI extends Phaser.Scene {
 		});
 	}
 
+
 	update_lv() {
 		const { lv } = UI
 		lv.setText(`lv:${GAME.lv}`)
 	}
 
 	update_ehp() {
+		this.toggle_hint()
 		const { ehp } = UI
 		const { mhp, hp } = GAME.enemy
 
@@ -110,90 +113,87 @@ export default class GUI extends Phaser.Scene {
 		txt.setText(guess.join(""))
 	}
 
-	display_hint(){
-		if(!GAME.hint)return
+	display_hint() {
+		if (!GAME.hint) return
 		UI.hint = new Uis.Panel(this, 20, 640, WIDTH - 40, 240, 0xEC9A6D)
 		UI.hint.bg.setStrokeStyle(10, 0xC24B6E)
 		UI.hint._state = 'inactive'
-		UI.hint.setScale(0,1)
+		UI.hint.setScale(0, 1)
 
-		UI.hint_icon = this.add.circle(80, 700,40).setInteractive()
-		.on('pointerup', () => {
-
-			const {hint} = UI
-			if(hint._state == 'inactive')
-			{	
-				hint.setScale(1,1)
-				hint._state = 'active'
-				return
+		UI.hint_icon = this.add.circle(80, 700, 40).setInteractive()
+			.on('pointerup', () => {
+				this.toggle_hint()
 			}
-			hint.setScale(0,1)
-			hint._state = 'inactive'
-		}
-		);
-		
-		this.add.image(80, 700,'ui','hint')
+			);
+
+		this.add.image(80, 700, 'ui', 'hint')
 
 
 		let word = GAME.hint
 		let w_len = word.length
 		let w_size = w_len < 8 ? 90 : (WIDTH) / w_len * 1.4
 
-		
+
 		const hint_txt = this.add.text((WIDTH - 40) / 2, 120, word,
 			{
 				font: ` ${w_size}px superstarregular`,
 				color: "#FFEB99",
 				align: "center",
-				baseLineY:'10px',
+				baseLineY: '10px',
 				wordWrap: { width: WIDTH - 60, useAdvancedWrap: true }
 			})
 			.setOrigin(0.5)
-			.setShadow( w_size/7, w_size/7, "#C24B6E")
-			.setPadding(10,10)
-		
+			.setShadow(w_size / 7, w_size / 7, "#C24B6E")
+			.setPadding(10, 10)
+
 		const hint_txt_indicator = this.add.text((WIDTH - 40) / 2, 20, 'hint:',
-		{
+			{
 				font: ` 60px superstarregular`,
 				color: "#FFEB99",
 				align: "center",
-		})
-		.setOrigin(0.5,0)
-		.setShadow(5,5, "#C24B6E")
+			})
+			.setOrigin(0.5, 0)
+			.setShadow(5, 5, "#C24B6E")
 
 		UI.hint.add(hint_txt)
 		UI.hint.add(hint_txt_indicator)
 	}
 
-	show_hint(){
+	toggle_hint() {
 		const { hint } = UI
-		hint.setScale(1,1)
+		if (hint._state == 'inactive') {
+			hint.setScale(1, 1)
+			hint._state = 'active'
+			return
+		}
+		hint.setScale(0, 1)
+		hint._state = 'inactive'
 	}
 
-	display_trivia(){
+	display_trivia() {
 		// pa adjust ng size (this,x,y,width,height,color)
 
-		const panel = new Uis.Panel(this,10, 10, WIDTH-20, HEIGHT-20, 0xEC9A6D)
+		const panel = new Uis.Panel(this, 10, 10, WIDTH - 20, HEIGHT - 20, 0xEC9A6D)
 		let fontSize = 200
 
-		const txt = this.add.text(WIDTH/2+10, HEIGHT*2/5, `did you know?\n${GAME.trivia}`,
-		{
-			fontFamily: `superstarregular`,
-			fontSize:'150px',
-			color: '#F2DB94',
-			align:'center',
-			wordWrap: { width: WIDTH - 50},
-			
-		})
-		.setOrigin(0.5)
-		.setShadow(5, 10, "#C24B6E")
+		const txt = this.add.text(WIDTH / 2 + 10, HEIGHT * 2 / 5, `did you know?\n${GAME.trivia}`,
+			{
+				fontFamily: `superstarregular`,
+				fontSize: '150px',
+				color: '#F2DB94',
+				align: 'center',
+				wordWrap: { width: WIDTH - 50 },
 
-		
-		while(txt.height > HEIGHT/3){
-			fontSize = fontSize*0.95
-			txt.setFontSize(fontSize+'px')
+			})
+			.setOrigin(0.5)
+			.setShadow(5, 10, "#C24B6E")
+
+
+		while (txt.height > HEIGHT / 3) {
+			fontSize = fontSize * 0.95
+			txt.setFontSize(fontSize + 'px')
 		}
-		
+
 
 	}
 
@@ -384,11 +384,11 @@ export default class GUI extends Phaser.Scene {
 		//adding the hp bars to the visua panel
 		// enemy
 		this.add.image(WIDTH / 4 + 11, 50, 'ui', 'B').setScale(2).setOrigin(0, 0.5)
-		UI.panel.ehp_1 = this.add.image(WIDTH / 4 + 11, 50, 'ui', 'F').setScale( 2).setOrigin(0, 0.5)
+		UI.panel.ehp_1 = this.add.image(WIDTH / 4 + 11, 50, 'ui', 'F').setScale(2).setOrigin(0, 0.5)
 		UI.panel.ehp = this.add.image(WIDTH / 4 + 11, 50, 'ui', 'F_1').setOrigin(0, 0.5)
 		this.add.image(WIDTH / 4, 50, 'ui', 'M').setScale(2).setOrigin(0, 0.5)
 		//player
-		this.add.image(WIDTH / 4+ 11, 590, 'ui', 'B').setScale(2).setOrigin(0, 0.5)
+		this.add.image(WIDTH / 4 + 11, 590, 'ui', 'B').setScale(2).setOrigin(0, 0.5)
 		UI.panel.hp_1 = this.add.image(WIDTH / 4 + 11, 590, 'ui', 'F_1').setScale(2).setOrigin(0, 0.5)
 		UI.panel.hp = this.add.image(WIDTH / 4 + 11, 590, 'ui', 'F').setOrigin(0, 0.5)
 		this.add.image(WIDTH / 4, 590, 'ui', 'M').setScale(2).setOrigin(0, 0.5)
@@ -443,8 +443,8 @@ export default class GUI extends Phaser.Scene {
 	create_key(x, y, w, h, c) {
 
 		const excess_keys = GAME.excess_keys
-		
-		
+
+
 
 		let btn = new Uis.Button(this, x, y, w, h, 0xD9667B)
 		const txt = this.add.text(btn.w / 2, btn.h / 2, c,
@@ -459,13 +459,13 @@ export default class GUI extends Phaser.Scene {
 		btn.val = c
 		btn.txt = txt
 		btn.once("click", click)
-		btn.set_bg(this.add.image(-3, 0,'ui',"btn1_lowres").setOrigin(0).setScale(0.65))
+		btn.set_bg(this.add.image(-3, 0, 'ui', "btn1_lowres").setOrigin(0).setScale(0.65))
 		btn.add(txt)
 
 
 		btn.once("disabled", () => {
 			const { txt, bg } = btn
-			btn.set_bg(this.add.image(-3, 0,'ui',"btn0_lowres").setOrigin(0).setScale(0.65))
+			btn.set_bg(this.add.image(-3, 0, 'ui', "btn0_lowres").setOrigin(0).setScale(0.65))
 			btn.moveUp(txt.setColor("#B0294D"))
 			btn.txt.setShadow(0, 0)
 		});
@@ -484,7 +484,7 @@ export default class GUI extends Phaser.Scene {
 
 	init_events() {
 		const { events } = GAME
-		
+
 		events.on("attack", (data) => {
 			this.update_blanks(data.guess)
 			this.update_ehp()
@@ -566,10 +566,10 @@ export default class GUI extends Phaser.Scene {
 		});
 	}
 
-	disble_buttons(){
-		for(const btn of UI.keyboard.list ){
-			if(btn.constructor.name != 'Button')continue
-			if(!btn.is_enabled)continue
+	disble_buttons() {
+		for (const btn of UI.keyboard.list) {
+			if (btn.constructor.name != 'Button') continue
+			if (!btn.is_enabled) continue
 			btn.disable()
 		}
 	}
@@ -591,7 +591,7 @@ export default class GUI extends Phaser.Scene {
 
 	display_next() {
 
-		if(GAME.trivia)this.display_trivia()
+		if (GAME.trivia) this.display_trivia()
 
 		if (GAME.words.length < 1) return this.display_victory()
 
@@ -690,7 +690,7 @@ export default class GUI extends Phaser.Scene {
 			}
 		})
 
-		
+
 
 		this.tweens.add({
 			targets: enemy,
