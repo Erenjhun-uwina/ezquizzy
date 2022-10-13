@@ -20,7 +20,7 @@ import DB from '../global_js/database.js'
 		});
     	
     	async function start(){
-
+			console.log('start')
 			code_input.placeholder = "blank code????bruh"
 			if(code_input.value == '')return
     		
