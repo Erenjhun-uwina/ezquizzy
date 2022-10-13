@@ -107,10 +107,10 @@ export default class Game extends Phaser.Scene {
 		this.word =  [...word_hint_trivia[0]]
 
 		this.hint =  word_hint_trivia[1]
-		// console.log('hint:',this.hint)
+		 console.log('hint:',this.hint)
 
 		this.trivia =  word_hint_trivia[2]
-		// console.log('trivia:',this.trivia)
+		console.log('trivia:',this.trivia)
 
 		const word = this.word
 

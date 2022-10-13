@@ -111,27 +111,57 @@ export default class GUI extends Phaser.Scene {
 	}
 
 	display_hint(){
-
-		UI.hint_icon = this.add.circle(20,20,20,0xfffff)
+		if(!GAME.hint)return
 		UI.hint = new Uis.Panel(this, 20, 640, WIDTH - 40, 240, 0xEC9A6D)
-		UI.hint.bg.setStrokeStyle(10, 0xFFEB99)
+		UI.hint.bg.setStrokeStyle(10, 0xC24B6E)
+		UI.hint._state = 'inactive'
+		UI.hint.setScale(0,1)
+
+		UI.hint_icon = this.add.circle(60, 680,30,0xfffff).setInteractive()
+		.on('pointerup', () => {
+
+			const {hint} = UI
+			if(hint._state == 'inactive')
+			{	
+				hint.setScale(1,1)
+				hint._state = 'active'
+				return
+			}
+			hint.setScale(0,1)
+			hint._state = 'inactive'
+		}
+		);
+
 
 		let word = GAME.hint
 		let w_len = word.length
 		let w_size = w_len < 8 ? 90 : (WIDTH) / w_len * 1.4
 
-		const blank_txt = this.add.text((WIDTH - 40) / 2, 120, word,
+		
+
+		const hint_txt = this.add.text((WIDTH - 40) / 2, 120, word,
 			{
 				font: ` ${w_size}px superstarregular`,
 				color: "#FFEB99",
 				align: "center",
+				baseLineY:'10px',
 				wordWrap: { width: WIDTH - 60, useAdvancedWrap: true }
 			})
 			.setOrigin(0.5)
-			.setShadow(5, 10, "#C24B6E")
+			.setShadow( w_size/7, w_size/7, "#C24B6E")
+			.setPadding(10,10)
+		
+		const hint_txt_indicator = this.add.text((WIDTH - 40) / 2, 20, 'hint:',
+		{
+				font: ` 60px superstarregular`,
+				color: "#FFEB99",
+				align: "center",
+		})
+		.setOrigin(0.5,0)
+		.setShadow(5,5, "#C24B6E")
 
-		UI.hint.add(blank_txt)
-		// UI.hint.txt = blank_txt
+		UI.hint.add(hint_txt)
+		UI.hint.add(hint_txt_indicator)
 	}
 
 	show_hint(){
@@ -142,16 +172,16 @@ export default class GUI extends Phaser.Scene {
 	display_trivia(){
 		// pa adjust ng size (this,x,y,width,height,color)
 
-		const panel = new Uis.Panel(this ,10, 10, WIDTH-20, HEIGHT-20, 0xB0294D)
+		const panel = new Uis.Panel(this,10, 10, WIDTH-20, HEIGHT-20, 0xB0294D)
 		let fontSize = 200
 
-		const txt = this.add.text(WIDTH/2 , HEIGHT*2/5, ` did you know?\n${GAME.trivia}`,
+		const txt = this.add.text(WIDTH/2+10, HEIGHT*2/5, `did you know?\n${GAME.trivia}`,
 		{
 			fontFamily: `superstarregular`,
 			fontSize:'150px',
 			color: '#F2DB94',
 			align:'center',
-			wordWrap: { width: WIDTH - 20},
+			wordWrap: { width: WIDTH - 50},
 			
 		})
 		.setOrigin(0.5)
