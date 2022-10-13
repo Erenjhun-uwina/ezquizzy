@@ -132,14 +132,14 @@ export default class GUI extends Phaser.Scene {
 
 		const panel = new Uis.Panel(this , 20, 20, WIDTH - 40, HEIGHT-40, 0xB0294D)
 		
-		const txt = this.add.text(0, 0, `trivia:${GAME.trivia}`,
+		const txt = this.add.text(WIDTH/2, 40, `trivia:\n${GAME.trivia}`,
 		{
 			font: ` 2rem superstarregular`,
-			color: '#F2DB94'
+			color: '#F2DB94',
+			wordWrap:'auto'
 		})
 		
 
-		
 	}
 
 	display_defeat_panel() {
