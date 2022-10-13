@@ -155,7 +155,7 @@ export default class Game extends Phaser.Scene {
 
 		player.hp -= 1
 		this.events.emit("defend")
-		if (player.hp <= 0) this.events.emit("DEFEAT")
+		if (player.hp <= 0)this.events.emit("DEFEAT")
 	}
 
 	guess(key) {

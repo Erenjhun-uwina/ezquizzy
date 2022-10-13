@@ -278,6 +278,19 @@ export default class GUI extends Phaser.Scene {
 		this.fade()
 	}
 
+	escape(){
+		const panel = new Uis.Panel(this, 20, 20, WIDTH - 40, 600, 0x355D68).setScale(0,1)
+		panel.bg.setStrokeStyle(10, 0x94C5AC)
+
+		this.tweens.add({
+			targets:panel,
+			scaleX:1,
+			duration:300
+		})
+
+		const txt = this.add.text(WIDTH/2,HEIGHT/4,' luckily you have escaped...')
+		GAME.hp = 1
+	}
 
 	display_victory_panel() {
 		const victory = new Uis.Panel(this, WIDTH / 2, HEIGHT / 2, WIDTH - 40, 500, 0xB0294D)
@@ -546,6 +559,7 @@ export default class GUI extends Phaser.Scene {
 		});
 
 		events.once("DEFEAT", () => {
+			if( !GAME.survival ) return this.escape()
 			this.display_defeat()
 		});
 	}
@@ -673,7 +687,6 @@ export default class GUI extends Phaser.Scene {
 
 	}
 	//////////animations
-
 	play_enemy_faint() {
 
 		const { enemy } = UI.panel
