@@ -650,7 +650,7 @@ export default class GUI extends Phaser.Scene {
 				this.fade(()=>{
 					this.display_next()
 					this.fade()
-				}
+				})
 			
 				this.tweens.add({
 					targets: next,
