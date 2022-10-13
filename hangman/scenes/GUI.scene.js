@@ -138,6 +138,7 @@ export default class GUI extends Phaser.Scene {
 			color: '#F2DB94',
 			wordWrap:'auto'
 		})
+		.setOrigin(0.5)
 		
 
 	}

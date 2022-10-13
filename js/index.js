@@ -26,7 +26,6 @@ import DB from '../global_js/database.js'
     		
     		const code = code_input.value.split('-').join('').toLowerCase()
 
-    		
     		if(!await db.query_exists(code)){
     		    code_input.value=""
     			game_not_exists()
