@@ -134,7 +134,7 @@ export default class GUI extends Phaser.Scene {
 		
 		const txt = this.add.text(WIDTH/2, 40, `trivia:\n${GAME.trivia}`,
 		{
-			font: ` 2rem superstarregular`,
+			font: ` 4rem superstarregular`,
 			color: '#F2DB94',
 			wordWrap:'auto'
 		})
