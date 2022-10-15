@@ -1,14 +1,3 @@
-<!-- 
-
-	TODO:add radio input for randomize trivia 
-	po copy nalng ung sa shuffle palitan nio nalang
-	///
-	
-	 
-	chek box
-	label survival():
-
- -->
 
 
 <!DOCTYPE html>
@@ -25,7 +14,6 @@
 	<link rel="icon" href="/favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" href="style/style.create.css">
 	<link rel="stylesheet" href="../global_style/style.global.css">
-
 </head>
 
 <body>
@@ -43,20 +31,16 @@
 
 		<div>
 			<br>
-			
 			<!-- papalit ng  type =checkbox -->
-
-			
-			<input type="checkbox" value="true" name="shuffle" >
+			<input type="checkbox" value="true" name="shuffle">
 			<label for="shuffle">shuffle</label>
+			<br>
+			<input type="checkbox" value="true" name="rand_trivia">
+			<label for="trivia">display random trivia</label>
 			<br>
 			<input type="checkbox" value="true" name="survival">
 			<label for="survival">survival</label>
-
-			<br>
-			<input type="checkbox" value="true" name="rand_trivia" >
-			<label for="trivia">display random trivia</label>
-
+			
 		</div>
 		<!--  -->
 		<br>
@@ -104,10 +88,7 @@
 		const submit_btn = document.querySelector("#btns input[type='submit']")
 		const form = document.querySelector("form")
 		const db = new DB
-
-
 		submit_btn.onclick = submit
-
 
 		async function submit(e) {
 
@@ -117,13 +98,10 @@
 
 			const fdata = new FormData(form)
 
-
 			let code = generate_uc('HM-')
-
 			fdata.append("code", code.split('-').join('').toLowerCase())
 
-
-			for(const e of fdata.entries()){
+			for (const e of fdata.entries()) {
 				console.log(e);
 			}
 
@@ -131,7 +109,6 @@
 				.then(
 					() => window.location = "../create.success.html?code=" + code + '&title=' + fdata.get('title')
 				);
-
 		}
 
 	</script>
