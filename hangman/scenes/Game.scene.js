@@ -74,11 +74,11 @@ export default class Game extends Phaser.Scene {
 		
 		const url = new URLSearchParams(window.location.search);
 		const code = url.get("code").split('-').join('').toLowerCase()
-		const game = await db.query_game(code)
+		window.game = await db.query_game(code)
 
 		words = [...game.words]
-		// console.log(game)
 		
+
 		if (game.shuffle && !(game.shuffle === 'false')) words.shuffle()
 		this.words = words
 
@@ -121,8 +121,9 @@ export default class Game extends Phaser.Scene {
 
 		const word_keys = [...word]
 
-		const level = 1
-		const num_of_random_keys = level * 5
+		
+		const difficulty = game.difficulty
+		const num_of_random_keys = difficulty * 5
 
 		//generate random letters besides the word's letters
 		const excess = this.shuffle_slice(word_keys, num_of_random_keys)
@@ -186,7 +187,7 @@ export default class Game extends Phaser.Scene {
 	shuffle_slice(keys, num) {
 
 		const rand_keys = alphabet.filter(e => !keys.includes(e))
-		return rand_keys.slice(0, num).concat(keys).concat(["A", "O", "E"])
+		return rand_keys.shuffle().slice(0, num).concat(keys).concat(["A", "O", "E"])
 	}
 }
 
