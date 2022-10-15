@@ -80,7 +80,7 @@ export default class Game extends Phaser.Scene {
 		// console.log(game)
 		
 		if (game.shuffle && !(game.shuffle === 'false')) words.shuffle()
-		this.words = [...words]
+		this.words = words
 
 		//player vars
 		this.player = player

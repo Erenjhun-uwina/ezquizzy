@@ -76,6 +76,17 @@ export default class GUI extends Phaser.Scene {
 
 
 		if (!animate) return UI.panel.hp_1.setScale(hp_percent, 2)
+		
+		const {blanks,panel} = UI
+
+		blanks.bg.setStrokeStyle(10,0xC24B6E)
+		panel.bg.setStrokeStyle(10, 0xC24B6E)
+
+		this.time.delayedCall(300,()=>{
+			blanks.bg.setStrokeStyle(10,0xFFEB99)
+			panel.bg.setStrokeStyle(10, 0x94C5AC)
+		})
+
 		this.tweens.add({
 			targets: UI.panel.hp_1,
 			scaleX: hp_percent,
@@ -616,9 +627,16 @@ export default class GUI extends Phaser.Scene {
 		if (!escape) {
 			if (GAME.trivia) this.display_trivia()
 		}
+		
 		if(!this._fade_state)this.fade()
 
-		if (GAME.words.length < 1) return this.display_victory()
+		alert(GAME.words.length)
+		
+		if (GAME.words.length < 1) {
+			if(!this._fade_state)this.fade()
+			this.display_victory()
+			return
+		} 
 		
 		const next = new Uis.Button(this, WIDTH / 2, HEIGHT * 4 / 5, 400, 150, 0x345c6c)
 			.setScale(0, 1)

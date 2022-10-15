@@ -127,7 +127,6 @@
 				console.log(e);
 			}
 
-			return
 			db.add_game(fdata)
 				.then(
 					() => window.location = "../create.success.html?code=" + code + '&title=' + fdata.get('title')
