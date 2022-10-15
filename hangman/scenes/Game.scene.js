@@ -92,6 +92,7 @@ export default class Game extends Phaser.Scene {
 		this.enemy = enemy
 		//game
 		this.lv = 0
+		this.survival = game.survival
 		this.fight()
 		this.sound.play('fight', { loop: true })
 	}

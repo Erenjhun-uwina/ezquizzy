@@ -1,6 +1,5 @@
 
 import * as Uis from '../../global_js/Ui.js'
-import Screen from './Screen.scene.js'
 
 let WIDTH, HEIGHT, GAME, UI
 
@@ -622,18 +621,13 @@ export default class GUI extends Phaser.Scene {
 	}
 
 	display_next(escape) {
-
-
 		if (!escape) {
 			if (GAME.trivia) this.display_trivia()
 		}
 		
 		if(!this._fade_state)this.fade()
-
-		alert(GAME.words.length)
 		
 		if (GAME.words.length < 1) {
-			if(!this._fade_state)this.fade()
 			this.display_victory()
 			return
 		} 
