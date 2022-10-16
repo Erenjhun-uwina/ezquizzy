@@ -6,7 +6,6 @@ import "https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"
 import "https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"
 import generate_uc from './generate_ucode.js'
 
-if (!firebase) alert('cannot connect to server\nplease check your internet connection\n-EzQuizyy')
 
 let db,
 	app,
